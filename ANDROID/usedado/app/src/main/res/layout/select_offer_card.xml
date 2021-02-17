@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="190dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+
+    app:cardCornerRadius="@dimen/activity_horizontal_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center|top"
+        android:background="@drawable/green_gradient"
+
+        >
+
+
+        <ImageView
+            android:id="@+id/select_offer_card_pic"
+
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/select_offer_card_name"
+            android:textAlignment="center"
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:text="hallo"
+            ></TextView>
+        <TextView
+            android:id="@+id/select_offer_card_Recommended"
+            android:layout_width="match_parent"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="20dp"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="Recommended">
+
+        </TextView>
+        <TextView
+            android:id="@+id/select_offer_card_describtion"
+            android:layout_width="match_parent"
+
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="40dp"
+            android:textSize="10dp"
+            android:gravity="bottom|center"
+            android:paddingBottom="8dp"
+            android:textColor="@color/colorWhite"
+            android:text="hallsdswaaaaaaaaaaaaaaaaaaaaaaaaaaad sadas das d asd sa dsa d as d asd asd asasd  asd asd asd asd asd asd as d asd as d as d asd o">
+
+        </TextView>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

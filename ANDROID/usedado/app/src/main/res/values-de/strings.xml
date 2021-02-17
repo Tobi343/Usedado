@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Usedado</string>
+    <!-- Login Page -->
+    <string name="Sign_In">Einloggen</string>
+    <string name="Sign_Up">Regestrieren</string>
+    <string name="DontHaveAnAccount">Ich habe keinen Account? REGESTRIEREN</string>
+    <string name="AlreadyHaveAnAccount">Ich habe bereits einen Account? EINLOGGEN</string>
+    <string name="ForgotPassword">Passwort vergessen?</string>
+
+
+    <!-- Profile Page -->
+    <string name="Advertisments">Anzeigen</string>
+    <string name="Messages">Nachrichten</string>
+    <string name="Member">Mitglied</string>
+    <string name="Email">Email-Adresse</string>
+    <string name="Phone">Telefonnummer</string>
+    <string name="Address">Adresse</string>
+    <string name="Birthday">Mitglied seit</string>
+    <string name="Password">Passwort</string>
+    <string name="recently_trending">Derzeit Beliebt</string>
+
+</resources>

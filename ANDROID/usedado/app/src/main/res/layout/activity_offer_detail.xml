@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/long_image"
+        android:layout_height="330dp"
+        android:background="@color/black"
+        android:id="@+id/details_BigProfilePicture"
+        android:adjustViewBounds="true"
+        ></ImageView>
+
+
+    <ScrollView
+        android:id="@+id/data"
+        android:layout_width="match_parent"
+        android:layout_marginTop="-20dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="330dp"
+                    android:background="#11000000">
+                    <RelativeLayout
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent">
+                        <ImageView android:layout_width="35dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            android:id="@+id/details_back"
+
+                            android:background="@drawable/details_boxes"
+                            android:layout_height="35dp"></ImageView>
+
+                        <ImageView android:layout_width="35dp"
+                            android:layout_marginTop="30dp"
+                            android:id="@+id/details_share"
+                            android:layout_marginLeft="65dp"
+                            android:src="@drawable/ic_baseline_share_24"
+                            android:padding="5dp"
+                            android:background="@drawable/details_boxes"
+                            android:layout_height="35dp"></ImageView>
+
+                        <ImageView android:layout_width="35dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/ic_baseline_star_border_24"
+                            android:padding="6dp"
+                            android:background="@drawable/details_boxes"
+                            android:id="@+id/details_mark_as_important"
+                            android:layout_height="35dp"></ImageView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="wrap_content"
+                            android:id="@+id/details_recycler_images"
+                            android:layout_alignParentRight="true"
+
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="90dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:background="@drawable/image_round_top"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/details_productName"
+                        android:text="Amazon Echo"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="30dp"
+                        android:textColor="@color/black"></TextView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Price: "
+                            android:textSize="20dp"
+                            android:textColor="@color/black"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$29"
+                            android:id="@+id/details_productPrice"
+                            android:textSize="25dp"
+                            android:textStyle="bold"
+                            android:textColor="#0FA0D7"></TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Free Shipping"
+                        android:id="@+id/details_text_shipping_price"
+                        android:textSize="18dp"
+                        android:textColor="#6D6D6D"></TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/profile_overview"
+                        android:layout_marginVertical="35dp"
+                        android:layout_height="60dp"
+                        android:padding="10dp"
+                        android:id="@+id/details_profile_overview"
+                        android:orientation="horizontal"
+                        >
+
+
+                        <fragment
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="50dp"
+                            android:id="@+id/maps"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"></fragment>
+
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/details_userPicture"
+
+                      >
+
+                        </ImageView>
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/details_productUser"
+                                android:text="Your Name"
+                                android:textAllCaps="true"
+                                android:textSize="16dp"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/black"></TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Dr. Baumhacklstraße 10/9"
+                                android:textAllCaps="true"
+                                android:textSize="13dp"
+                                android:id="@+id/details_productAddress"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/black"></TextView>
+                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:id="@+id/details_appenMap"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_baseline_map_24"
+                            app:tint="@color/main_font">
+
+                        </ImageView>
+
+
+
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Describtion"
+                        android:textAllCaps="true"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/black"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="What are you doing here and why are you doing these things that is crazy!"
+                        android:textSize="14dp"
+                        android:paddingTop="2dp"
+                        android:id="@+id/details_description"
+                        android:textColor="@color/black"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Questions"
+                        android:textAllCaps="true"
+                        android:layout_marginTop="30dp"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="10dp"></TextView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:id="@+id/activity_offer_detail_recyclerView_questions"
+                        android:layout_height="wrap_content" android:layout_marginBottom="30dp">
+
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_gravity="bottom"
+        android:text="Contact Seller"
+        android:textColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:background="@color/colorDarkerWhite"
+        android:layout_margin="10dp"
+        android:id="@+id/offer_detail_contact_seller_button"
+        android:backgroundTint="@color/main_font"
+        android:layout_height="50dp">
+
+    </Button>
+</FrameLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.company.usedado">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+
+    <application
+
+
+
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Java.activitys.activity_offerActivitys"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.my_offers"
+            android:theme="@style/AppTheme2" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".Java.activitys.Add_offer"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.categories"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.Offer_detail"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.profile"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.Dashboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Java.activitys.Register_Page"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Java.activitys.Login_Page"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+    </application>
+
+</manifest>

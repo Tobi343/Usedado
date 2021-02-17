@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+android:layout_height="match_parent" android:layout_width="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android" >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account,"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:textSize="30dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/black">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up to get started!"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/midGrey">
+    </TextView>
+    <EditText
+        android:layout_marginTop="50dp"
+        android:id="@+id/Register_editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/input_round"
+        android:maxHeight="10dp"
+        android:inputType="text"
+        android:layout_marginHorizontal="20dp"
+
+        android:hint="Full Name"/>
+    <EditText
+
+        android:id="@+id/Register_editTextTextEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/input_round"
+        android:maxHeight="10dp"
+        android:paddingLeft="15dp"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="10dp"
+        android:hint="Email"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/Register_editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/input_round"
+        android:maxHeight="10dp"
+        android:inputType="textPassword"
+        android:layout_marginHorizontal="20dp"
+
+        android:hint="Password"/>
+
+
+
+
+    <TextView
+        android:id="@+id/Register_ForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ForgotPassword"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:gravity="right"
+        >
+    </TextView>
+
+
+
+
+
+
+    <Button
+        android:id="@+id/Register_SignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/button_round_gradient"
+        android:text="@string/Sign_In"
+        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"></Button>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/Register_SignInWithFacebook"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/facebook_logo">
+            ></Button>
+
+        <Button
+            android:id="@+id/Register_SignInWithGoogle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"        android:background="@drawable/google_logo">
+            >
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+<TextView
+    android:id="@+id/Register_NoAccount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+
+    android:text="@string/DontHaveAnAccount"
+    android:textColor="@color/black"
+    android:padding="10dp"
+    android:gravity="center"
+    android:textSize="15dp"
+    android:layout_marginBottom="25dp">
+</TextView>
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/main_font"
+
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="USEDADO"
+            android:textStyle="bold|italic"
+            android:textSize="60dp"
+            android:id="@+id/splashScreenBigText"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Market"
+            android:textStyle=""
+            android:textSize="40dp"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+        </TextView>
+    </LinearLayout>
+
+</RelativeLayout>

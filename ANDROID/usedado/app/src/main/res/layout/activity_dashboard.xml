@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginBottom="60dp">
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/green_gradient">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Hallo User,"
+                        android:id="@+id/dashboard_name"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        ></TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Erstelle jetzt deine erste Anzeige"
+                        android:textColor="@color/colorDarkWhite"
+                        android:textSize="15dp"
+                        ></TextView>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:clickable="true"
+                    android:id="@+id/dashboard_profile"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/cardview_light_background"
+                    ></ImageView>
+
+            </RelativeLayout>
+            <AutoCompleteTextView
+
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="-28dp"
+                android:background="@drawable/search_bar"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="16dp"
+
+                android:maxLines="1"
+                android:drawableLeft="@drawable/ic_search"
+                android:id="@+id/dashboard_searchbar"
+                android:inputType="textAutoComplete"
+                android:paddingHorizontal="20dp"
+                android:hint="Search for Items">
+            </AutoCompleteTextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="80dp"
+                    android:text="Need Help?"
+                    android:id="@+id/CheckMessages"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/green_gradient"
+                    android:layout_marginHorizontal="5dp"
+                    >
+
+
+                </Button>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="80dp"
+                    android:text="MY ADDs"
+                    android:id="@+id/dashboard_btn_my_adds"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/green_gradient"
+                    android:layout_marginHorizontal="5dp"
+                    ></Button>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/dashboard_searchAll"
+                    android:layout_height="80dp"
+                    android:text="Search All"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/green_gradient"
+                    android:layout_marginHorizontal="5dp"
+                    ></Button>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="30dp"
+                android:background="@color/black"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Empfehlungen"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:id="@+id/dashboard_long_viewRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Kategorien"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/dashboard_long_second_viewRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/recently_trending"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/dashboard_wide_viewRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:background="@color/colorWhite"
+            app:itemIconTint="@color/main_font"
+            app:itemTextColor="@color/main_font"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/navigation"
+            android:layout_alignParentBottom="true"
+            app:labelVisibilityMode="labeled"
+            >
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+</RelativeLayout>

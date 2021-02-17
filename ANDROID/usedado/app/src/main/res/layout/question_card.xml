@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/midGrey"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/paypal"
+            android:layout_margin="10dp"
+            ></ImageView>
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:lines="1"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="What is that in hell ?"
+                android:textStyle="bold">
+
+            </TextView>
+            <TextView
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:text="Wasdasdasdasda dsd asda asdsajd fsafasfa faf afasfa sfsafa sfasf asfa asfasf asfa sfasf afaf as adsfsdfsdf sdfasdfadsfs dsadgash sdhsagdhsah djgsd hsj dggsdgshagdghjsagdhjasgd gasgdhjasgdgsdahgdas ashjdgasd gasgd soll das eigentlich sein?"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                >
+
+
+            </TextView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

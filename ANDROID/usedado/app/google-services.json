@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "478739260902",
+    "firebase_url": "https://usedado.firebaseio.com",
+    "project_id": "usedado",
+    "storage_bucket": "usedado.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478739260902:android:e61091ea0c8ae77e062227",
+        "android_client_info": {
+          "package_name": "com.company.usedado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478739260902-t6abhp1injflnmkm9rh8s9ubj878kg8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-ytBxTbiinSJj94UEv1i274dlLhRk6y4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478739260902-t6abhp1injflnmkm9rh8s9ubj878kg8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
