@@ -1,0 +1,37 @@
+Dejan:
+	Was hast du gemacht?
+		- Login mit Google eingerichtet
+		- Mit Firebase ging das easy 
+	Was wirst du jetzt machen?
+		-Login mit Facebook
+	Gabs Probleme?
+		- Ja man kann nähmlich keinen Google account auswählen sonderen es wird immer der aktuelle account am gerät genommen, aber das is nur ein kleines Problem was wir mal lassen
+
+
+Mahdi: 
+	Was hast du gemacht? 
+		- Ich habe die notifications design begonnen
+	Was wirst du jetzt machen?
+		- Es noch verschöneren und für verschiedene Display größen anpassen
+	Gabs Probleme? 
+		-Keine die mich lange aufgehalten haben
+
+
+Michi: 
+	Was hast du gemacht? 
+		- Ich habe ein Node.js script geschrieben was die raufgeladenen Images resized um die Datenbank nicht zu überfüllen
+	Was wirst du machen?
+		- Ich deploye diese Function auf Firebase fucntions damit sie immer wieder aufgerufen wird bei einem bild upload
+	Gabs Probleme? 
+		- Naja ich schaue mir Firebase functions zum ersten mal an und weiß halt noch nicht genau wie es geht
+
+
+
+-Clicks
+-Anfrage
+-Delete
+-Negotiate
+-Notify
+
+-Questions
+
