@@ -39,13 +39,15 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements Serializable {
 
     private  ImageView profile;
     private  Button searchAll;
@@ -131,7 +133,7 @@ public class Dashboard extends AppCompatActivity {
                 for (QueryDocumentSnapshot queryDocumentSnapshot :task.getResult()) {
                     Map<String, Object> data = queryDocumentSnapshot.getData();
                     items.add(new DashboardBigCardItem( (ArrayList<String>) data.get("Images"),data.get("Name").toString(), data.get("Catagory").toString(),data.get("Price").toString(), data.get("DeliveryPrice").toString(),
-                            data.get("User").toString(),data.get("UID").toString(),queryDocumentSnapshot.getId(),data.get("Describtion").toString(), Integer.parseInt(data.get("Aufrufe").toString()),(ArrayList<String>)data.get("AllowedPayments"),(Map<String, String>)data.get("Questions")));
+                            data.get("User").toString(),data.get("UID").toString(),queryDocumentSnapshot.getId(),data.get("Describtion").toString(), Integer.parseInt(data.get("Aufrufe").toString()),(ArrayList<String>)data.get("AllowedPayments")));
                 }
                 String[] names = new String[items.size()];
                 for (int i = 0; i < items.size(); i++) {
@@ -197,15 +199,9 @@ public class Dashboard extends AppCompatActivity {
         final DocumentReference docDb = FirebaseFirestore.getInstance().collection("Offers").document(item.getofferID());
         docDb.update("Aufrufe", FieldValue.increment(1));
         Intent intent = new Intent(getApplicationContext(), Offer_detail.class);
-        intent.putExtra("PRODUCT_NAME",item.getName());
-        intent.putExtra("PRODUCT_URI",item.getImageResource().toString());
-        intent.putExtra("PRODUCT_PRICE",item.getPrice());
-        intent.putExtra("PRODUCT_USER",item.getUID());
-        intent.putExtra("PRODUCT_DELIVERYPRICE",item.getDeliveryPrice());
-        intent.putExtra("PRODUCT_IMAGES",item.getImages());
-        intent.putExtra("PRODUCT_DESC",item.getDescribtion());
-        intent.putExtra("PRODUCT_ID",item.getofferID());
-        intent.putExtra("PRODUCT_QUESTIONS", (Parcelable) item.getQuestions());
+        Gson gson = new Gson();
+        String myJson = gson.toJson(item);
+        intent.putExtra("PRODUCT", myJson);
         startActivity(intent);
     }
 

@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.company.usedado.Java.dialogs.dialog_profile;
 import com.company.usedado.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -17,14 +19,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
 
 
-public class Login_Page extends AppCompatActivity {
+public class Login_Page extends AppCompatActivity implements dialog_profile.dialog_profile_Listener {
 
     private static final String TAG = "Login_Page";
     private static final int RC_SIGN_IN = 9001;
@@ -121,6 +129,8 @@ public class Login_Page extends AppCompatActivity {
 
         ForgotPasswordText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                dialog_profile dp = new dialog_profile("Enter your Email Address!");
+                dp.show(getSupportFragmentManager(),"example Dialog");
 
             }
         });
@@ -180,6 +190,23 @@ public class Login_Page extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
+    @Override
+    public void applyTexts(final String newText, String title) {
+        FirebaseAuth.getInstance().sendPasswordResetEmail(newText)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Login_Page.this, "Check your Mails!", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(Login_Page.this, "Failure!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
     //TODO save user data to the Cache to reduce database calls!!
 

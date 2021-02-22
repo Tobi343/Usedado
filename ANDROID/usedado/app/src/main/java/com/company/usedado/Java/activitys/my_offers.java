@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -58,10 +60,30 @@ public class my_offers extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
 //String name, String topic, String price, String delivery, String user, String userID, String offerID, String describtion, int aufrufe, ArrayList<String> allowedPayments, ArrayList<Map<String, String>> questions) {
 
-                                offers.add(new DashboardBigCardItem((ArrayList<String>) document.get("Images"),document.get("Name").toString(), null, document.get("Price").toString()+"€", null, null, null , document.getId(),null, Integer.parseInt(document.get("Aufrufe").toString()), null,(Map<String, String>) document.get("Questions")));
+                            offers.add(new DashboardBigCardItem((ArrayList<String>) document.get("Images"),
+                                    document.get("Name").toString(),
+                                    document.get("Catagory").toString(),
+                                    document.get("Price").toString()+"€",
+                                    document.get("DeliveryPrice").toString(),
+                                    document.get("User").toString(),
+                                    document.get("UID").toString() ,
+                                    document.getId(),
+                                    document.get("Describtion").toString(),
+                                    Integer.parseInt(document.get("Aufrufe").toString()),
+                                    (ArrayList<String>)document.get("AllowedPayments")));
+
                         }
                         ya = new YourOfferAdapter(offers);
-
+                        ya.setOnItemClickListner(new YourOfferAdapter.OnItemClickListner() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent intent = new Intent(getApplicationContext(), Add_offer.class);
+                                Gson gson = new Gson();
+                                String myJson = gson.toJson(offers.get(position));
+                                intent.putExtra("PRODUCT", myJson);
+                                startActivity(intent);
+                            }
+                        });
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(ya);

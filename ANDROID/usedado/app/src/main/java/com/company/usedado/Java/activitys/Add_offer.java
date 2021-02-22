@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.usedado.Java.adapter.AddOfferPictureCardAdapter;
+import com.company.usedado.Java.items.DashboardBigCardItem;
 import com.company.usedado.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,9 +37,12 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,6 +82,7 @@ public class Add_offer extends AppCompatActivity {
 
     private TextView priceView;
 
+    private DashboardBigCardItem item;
 
     ArrayList<String> allowedPayments;
     ArrayList<String> picList;
@@ -89,6 +94,31 @@ public class Add_offer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_offer);
         SetOnClickListner();
+        if(getIntent().hasExtra("PRODUCT")){
+            LoadForEdit();
+        }
+    }
+
+    private void LoadForEdit(){
+        Gson gson = new Gson();
+        item = gson.fromJson(getIntent().getStringExtra("PRODUCT"), DashboardBigCardItem.class);
+        for (String image : item.getImages()) {
+            picList.add(0,image);
+        }
+        adapter.notifyDataSetChanged();
+        catagory.setText(item.getTopic());
+        price.setText(item.getPrice().replace("€",""));
+        describtion.setText(item.getDescribtion());
+        name.setText(item.getName());
+        deliveryPrice.setText(item.getDeliveryPrice());
+        for (String allowedPayment : item.getAllowedPayments()) {
+            if(allowedPayment.equals("payPal"))
+                payPal.setChecked(true);
+            if(allowedPayment.equals("cash"))
+                cash.setChecked(true);
+            if(allowedPayment.equals("bank"))
+                bank.setChecked(true);
+        }
     }
 
     private void SetOnClickListner() {
@@ -147,14 +177,18 @@ public class Add_offer extends AppCompatActivity {
                 data.put("Price", price.getText().toString());
                 data.put("DeliveryPrice", deliveryPrice.getText().toString());
                 data.put("Describtion", describtion.getText().toString());
-                data.put("Aufrufe", 0);
-                data.put("Questions", new HashMap<String, String>());
+                data.put("Aufrufe", getIntent().hasExtra("PRODUCT")?item.getAufrufe():0);
+                data.put("Questions", new ArrayList<String>());
                 data.put("UID", user.getUid());
                 data.put("Images", picList);
                 data.put("lastPrice", lastPrice.getText().toString());
                 data.put("AllowedPayments",allowedPayments);
                 CollectionReference colDb = FirebaseFirestore.getInstance().collection("Offers");
-                colDb.document().set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                DocumentReference docRef = colDb.document();
+                if(getIntent().hasExtra("PRODUCT")){
+                    docRef = colDb.document(item.getofferID());
+                }
+                docRef.set(data, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(Add_offer.this, "Successfully created!", Toast.LENGTH_SHORT).show();

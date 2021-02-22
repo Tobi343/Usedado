@@ -5,18 +5,19 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class DashboardBigCardItem {
+public class DashboardBigCardItem implements Serializable {
 
-    private Uri imageResource;
+    private String imageResource;
     private ArrayList<String> images;
     private String name;
-    private String topic;
+    private String topic; //Categorie
     private String price;
     private String delivery;
     private String user;
@@ -25,11 +26,10 @@ public class DashboardBigCardItem {
     private String describtion;
     private int aufrufe;
     private ArrayList<String> allowedPayments;
-    private Map<String, String> questions;
 
 
-    public DashboardBigCardItem( ArrayList<String> images, String name, String topic, String price, String delivery, String user, String userID, String offerID, String describtion, int aufrufe, ArrayList<String> allowedPayments, Map<String, String> questions) {
-        this.imageResource = Uri.parse(images.get(0));
+    public DashboardBigCardItem( ArrayList<String> images, String name, String topic, String price, String delivery, String user, String userID, String offerID, String describtion, int aufrufe, ArrayList<String> allowedPayments) {
+        this.imageResource = images.get(0);
         this.images = images;
         this.name = name;
         this.topic = topic;
@@ -41,11 +41,10 @@ public class DashboardBigCardItem {
         this.describtion = describtion;
         this.aufrufe = aufrufe;
         this.allowedPayments = allowedPayments;
-        this.questions = questions;
     }
 
 
-    public Uri getImageResource() {
+    public String getImageResource() {
         return imageResource;
     }
 
@@ -93,7 +92,4 @@ public class DashboardBigCardItem {
         return allowedPayments;
     }
 
-    public Map<String, String> getQuestions() {
-        return questions;
-    }
 }

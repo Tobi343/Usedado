@@ -20,8 +20,9 @@ public class Offer_Offer_Item {
     private String UserID;
     private String OfferID;
     private String ID;
+    private String Method;
 
-    public Offer_Offer_Item(Uri image, String title, int originalPrice, int offerdPrice, String additionalComments, OfferState state, String userID, String offerID, String ID) {
+    public Offer_Offer_Item(Uri image, String title, int originalPrice, int offerdPrice, String additionalComments, OfferState state, String userID, String offerID, String ID, String method) {
         this.image = image;
         this.title = title;
         this.originalPrice = originalPrice;
@@ -31,6 +32,7 @@ public class Offer_Offer_Item {
         UserID = userID;
         OfferID = offerID;
         this.ID = ID;
+        this.Method = method;
     }
 
     public Uri getImage() {
@@ -71,5 +73,9 @@ public class Offer_Offer_Item {
 
     public void setState(OfferState state) {
         this.state = state;
+    }
+
+    public String getMethod() {
+        return Method;
     }
 }

@@ -152,8 +152,6 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content">
             </TextView>
-
-
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/dashboard_long_second_viewRecycler"
@@ -165,9 +163,6 @@
                 android:orientation="horizontal">
 
             </androidx.recyclerview.widget.RecyclerView>
-
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:text="@string/recently_trending"
@@ -178,8 +173,6 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content">
             </TextView>
-
-
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/dashboard_wide_viewRecycler"
@@ -189,10 +182,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="40dp"
                 android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
-
-
-
-
         </LinearLayout>
     </ScrollView>
         <com.google.android.material.bottomnavigation.BottomNavigationView

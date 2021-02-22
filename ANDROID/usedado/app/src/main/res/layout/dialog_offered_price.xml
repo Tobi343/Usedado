@@ -10,5 +10,10 @@
         android:inputType="number"
         android:id="@+id/dialog_offered_price_editText"
         ></EditText>
-
+    <RadioGroup
+        android:id="@+id/dialog_offered_price_llayout"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"></RadioGroup>
 </LinearLayout>

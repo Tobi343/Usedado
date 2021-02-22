@@ -78,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+
                     android:paddingHorizontal="20dp"
                     android:background="@drawable/image_round_top"
                     >
@@ -89,6 +90,7 @@
                         android:text="Amazon Echo"
                         android:textSize="30dp"
                         android:textStyle="bold"
+
                         android:layout_marginTop="30dp"
                         android:textColor="@color/black"></TextView>
 
@@ -214,6 +216,56 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Allowed Payments"
+                        android:textAllCaps="true"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:paddingTop="2dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/black"></TextView>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:orientation="horizontal"
+                       android:layout_height="55dp">
+                       <ImageView
+                           android:id="@+id/offer_detail_payPal"
+                           android:layout_width="35dp"
+                           android:layout_height="35dp"
+                           android:layout_margin="10dp"
+                           android:src="@drawable/paypal"
+                           ></ImageView>
+                       <ImageView
+                           android:layout_width="35dp"
+                           android:id="@+id/offer_detail_bar"
+                           android:layout_height="35dp"
+                           android:src="@drawable/ic_baseline_attach_money_24"
+                           android:layout_margin="10dp"
+
+                           app:tint="@color/main_green"></ImageView>
+                       <ImageView
+                           android:layout_width="35dp"
+                           android:id="@+id/offer_detail_bank"
+                           android:layout_height="35dp"
+                           android:src="@drawable/ic_baseline_payment_24"
+                           android:layout_margin="10dp"
+                           app:tint="@color/main_orange"></ImageView>
+
+                       <TextView
+                           android:id="@+id/offer_detail_sonstiges"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Paysafe"
+                           android:textSize="20dp"
+                            android:layout_margin="12dp"
+                           android:textColor="@color/black"
+                           ></TextView>
+                   </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Questions"
                         android:textAllCaps="true"
@@ -230,8 +282,45 @@
 
 
                     </androidx.recyclerview.widget.RecyclerView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Answer to Vincenz"
+                        android:drawableRight="@drawable/ic_baseline_clear_24"
+                        android:layout_marginBottom="10dp" android:textSize="15dp"
+                        android:id="@+id/details_answer_to"
+                        android:visibility="gone"
+                        android:drawableTint="@color/main_red"
+                        android:layout_height="wrap_content">
 
-                    </LinearLayout>
+                    </TextView>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="100dp"
+
+                        android:orientation="horizontal">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_marginRight="100dp"
+                            android:hint="ask a Question..."
+                            android:textColor="@color/black"
+                            android:id="@+id/details_question"
+                            android:layout_height="wrap_content">
+
+                        </EditText>
+                        <Button
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="100dp"
+                            android:backgroundTint="@color/main_blue"
+                            android:text="SEND"
+                            android:id="@+id/details_send_question"
+                            android:textColor="@color/colorWhite"
+                            android:layout_height="50dp">
+
+                        </Button>
+                    </RelativeLayout>
+                </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <Button

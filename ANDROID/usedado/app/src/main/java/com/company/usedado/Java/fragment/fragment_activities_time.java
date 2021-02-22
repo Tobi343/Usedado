@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,15 +16,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.company.usedado.Java.adapter.Offer_Offer_Adapter;
 import com.company.usedado.Java.items.Offer_Offer_Item;
 import com.company.usedado.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class fragment_activities_time extends Fragment {
 
     View v;
     private RecyclerView recyclerView;
     private ArrayList<Offer_Offer_Item> activites;
+    Offer_Offer_Adapter adapter;
 
     public fragment_activities_time() {
     }
@@ -40,12 +50,36 @@ public class fragment_activities_time extends Fragment {
         private String additionalComments;
         private OfferState state;
          */
-        activites.add(new Offer_Offer_Item(Uri.parse("https://cdn57.androidauthority.net/wp-content/uploads/2020/04/oneplus-8-pro-ultra-wide-sample-twitter-1.jpg"),
-                                            "Hallo", 30,25,"Hey alles klar ?",null,"","",""));
-        activites.add(new Offer_Offer_Item(Uri.parse("https://cdn57.androidauthority.net/wp-content/uploads/2020/04/oneplus-8-pro-ultra-wide-sample-twitter-1.jpg"),
-                "Hallo", 30,25,"Hey alles klar ?",null,"","",""));
-        activites.add(new Offer_Offer_Item(Uri.parse("https://cdn57.androidauthority.net/wp-content/uploads/2020/04/oneplus-8-pro-ultra-wide-sample-twitter-1.jpg"),
-                "Hallo", 30,25,"Hey alles klar ?",null,"","",""));
+        CollectionReference reference = FirebaseFirestore.getInstance().collection("Activities");
+        reference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                    Map<String,Object> data = queryDocumentSnapshot.getData();
+                   if( data.get("OwnerID").toString().equals(FirebaseAuth.getInstance().getUid())){
+                       activites.add(new Offer_Offer_Item(
+                               Uri.parse(data.get("Image").toString()),
+                               data.get("Title").toString(),
+                               Integer.parseInt(data.get("OriginalPrice").toString()),
+                               Integer.parseInt(data.get("OfferdPrice").toString()),
+                               data.get("AdditionalComments").toString(),
+                               Offer_Offer_Item.OfferState.valueOf(data.get("State").toString()),
+                               data.get("UserID").toString(),
+                               data.get("OfferID").toString(),
+                               data.get("OwnerID").toString(),
+                               data.get("Method").toString()));
+                   }
+
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Nullable
@@ -53,7 +87,8 @@ public class fragment_activities_time extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_view_time,container,false);
         recyclerView = v.findViewById(R.id.fragment_view_time_recycler_view);
-        recyclerView.setAdapter(new Offer_Offer_Adapter(activites));
+         adapter= new Offer_Offer_Adapter(activites);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return v;
     }

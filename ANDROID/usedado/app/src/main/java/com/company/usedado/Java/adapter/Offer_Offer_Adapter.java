@@ -37,6 +37,7 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
             holder.textView.setText(currentItem.getTitle());
             holder.textView1.setText("Original Price:  "+currentItem.getOriginalPrice());
             holder.textView2.setText("Offerd Price:     "+currentItem.getOfferdPrice());
+            holder.textView3.setText("via. "+currentItem.getMethod());
             holder.buttonReject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,6 +86,7 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
         public TextView textView;
         public TextView textView1;
         public TextView textView2;
+        public TextView textView3;
         public ImageView buttonReject;
         public ImageView buttonAccept;
         public ImageView buttonPending;
@@ -95,9 +97,11 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
             textView = itemView.findViewById(R.id.offer_offer_title);
             textView1= itemView.findViewById(R.id.offer_offer_oriPrice);
             textView2 = itemView.findViewById(R.id.offer_offer_offerPrice);
+            textView3 = itemView.findViewById(R.id.offer_offer_method);
             buttonReject = itemView.findViewById(R.id.offer_card_reject_button);
             buttonAccept = itemView.findViewById(R.id.offer_card_accept_button);
             buttonPending = itemView.findViewById(R.id.offer_card_pending_button);
+
         }
 
     }

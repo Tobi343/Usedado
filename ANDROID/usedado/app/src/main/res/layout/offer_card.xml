@@ -56,6 +56,13 @@
                     android:textColor="@color/main_blue"
                     android:layout_height="wrap_content">
                 </TextView>
+                <TextView
+                    android:id="@+id/offer_offer_method"
+                    android:layout_width="match_parent"
+                    android:text="via. PayPal"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content">
+                </TextView>
             </LinearLayout>
 
         </LinearLayout>

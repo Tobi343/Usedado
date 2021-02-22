@@ -35,7 +35,7 @@ public class activity_offerActivitys extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.AddFragment(new fragment_activities_time(),"New Activities");
         viewPagerAdapter.AddFragment(new fragment_activities_group(),"All Activities");
-        viewPagerAdapter.AddFragment(new fragment_activities_group(),"Response");
+        viewPagerAdapter.AddFragment(new fragment_activities_group(),"Responses");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 

@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class YourOfferAdapter extends RecyclerView.Adapter<YourOfferAdapter.YourOfferAdapterViewHolder> {
 
     private ArrayList<DashboardBigCardItem> offers = new ArrayList<DashboardBigCardItem>();
+    private OnItemClickListner mListner;
+
 
     public YourOfferAdapter(ArrayList<DashboardBigCardItem> offerList){
         offers = offerList;
@@ -27,7 +29,7 @@ public class YourOfferAdapter extends RecyclerView.Adapter<YourOfferAdapter.Your
     @Override
     public YourOfferAdapter.YourOfferAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.your_offer_card,parent,false);
-        YourOfferAdapter.YourOfferAdapterViewHolder mvh = new YourOfferAdapter.YourOfferAdapterViewHolder(v);
+        YourOfferAdapter.YourOfferAdapterViewHolder mvh = new YourOfferAdapter.YourOfferAdapterViewHolder(v,mListner);
         return mvh;
     }
 
@@ -50,6 +52,14 @@ public class YourOfferAdapter extends RecyclerView.Adapter<YourOfferAdapter.Your
         return offers.size();
     }
 
+    public interface OnItemClickListner{
+        void onItemClick(int position);
+    }
+
+
+    public void setOnItemClickListner(YourOfferAdapter.OnItemClickListner listner){
+        mListner = listner;
+    }
 
     public static class YourOfferAdapterViewHolder extends RecyclerView.ViewHolder{
 
@@ -58,12 +68,24 @@ public class YourOfferAdapter extends RecyclerView.Adapter<YourOfferAdapter.Your
         public TextView textView1;
         public TextView textView2;
 
-        public YourOfferAdapterViewHolder(@NonNull View itemView) {
+        public YourOfferAdapterViewHolder(@NonNull View itemView, final YourOfferAdapter.OnItemClickListner listner) {
             super(itemView);
             imageView = itemView.findViewById(R.id.your_offer_card_pic);
             textView = itemView.findViewById(R.id.your_offer_card_price);
             textView1 = itemView.findViewById(R.id.your_offer_card_title);
             textView2 = itemView.findViewById(R.id.your_offer_card_aufrufe_text);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listner != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            listner.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
 
     }
