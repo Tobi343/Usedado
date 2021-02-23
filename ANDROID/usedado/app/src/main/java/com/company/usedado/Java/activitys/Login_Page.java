@@ -19,13 +19,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -46,6 +50,7 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
     private GoogleSignInOptions gso;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +69,12 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
         mAuth = FirebaseAuth.getInstance();
 
         SetOnClickListeners();
-
     }
+// ...
 
-    public void SetOnClickListeners(){
+
+
+        public void SetOnClickListeners(){
         //Declare Buttons
         SignInButton = findViewById(R.id.Login_SignInButton);
         SignInWithFaceBookButton = findViewById(R.id.Login_SignInWithFacebook);
@@ -92,6 +99,8 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
                         if (task.isSuccessful()) {
                             // Sign in success, Log Message and finish this Process
                             Log.d(TAG, "signInWithEmail:success");
+
+
                             finishedProcess();
 
                         } else {
@@ -106,7 +115,11 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
         });
 
         SignInWithFaceBookButton.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
             public void onClick(View v) {
+                
             }
         });
 
@@ -148,7 +161,26 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
                         if (task.isSuccessful()) {
                             // Sign in success
                             Log.d(TAG, "signInWithCredential:success");
-                            finishedProcess();
+                            FirebaseFirestore.getInstance().collection("Users").document(task.getResult().getUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                   String id = documentSnapshot.getId();
+                                    finishedProcess();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Login_Page.this, "No Account found! Please try Register!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Login_Page.this, Register_Page.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    Toast.makeText(Login_Page.this, task.getResult().getId(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

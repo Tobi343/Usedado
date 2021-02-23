@@ -162,7 +162,7 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
         contactSeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog_offered_price dop = new dialog_offered_price(Integer.parseInt(productPrice.getText().toString().replace("€","")),0,item.getAllowedPayments());
+                dialog_offered_price dop = new dialog_offered_price(Integer.parseInt(productPrice.getText().toString().replace("€","")),0,item.getAllowedPayments(),item.getName());
                 dop.show(getSupportFragmentManager(),"example Dialog");
             }
         });
@@ -262,13 +262,12 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
 
 
         answerTo.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            answer = false;
-                                            answerTo.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-        );
+            @Override
+            public void onClick(View v) {
+                answer = false;
+                answerTo.setVisibility(View.INVISIBLE);
+            }
+        });
         sendQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,6 +277,23 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
                     answer = false;
                     answerTo.setVisibility(View.INVISIBLE);
                     question.setText("");
+                    DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+
+                    docRef = FirebaseFirestore.getInstance().collection("Offers").document(item.getofferID());
+                    Map<String,ArrayList> data = new HashMap<>();
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    for (Pair<String, String> stringStringPair : questions) {
+                        String[] splitter = stringStringPair.first.split(";");
+                        arrayList.add(stringStringPair.first+";"+(splitter.length > 2 ? "Type: Answer;":"")+stringStringPair.second);
+                    }
+                    data.put("Questions",arrayList);
+                    docRef.set(data, SetOptions.merge()).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Offer_detail.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             }
         });
@@ -326,20 +342,7 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
                   docRef.update("favourites", FieldValue.arrayRemove(offerID));
               }
         }
-        docRef = FirebaseFirestore.getInstance().collection("Offers").document(item.getofferID());
-        Map<String,ArrayList> data = new HashMap<>();
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (Pair<String, String> stringStringPair : questions) {
-            String[] splitter = stringStringPair.first.split(";");
-            arrayList.add(stringStringPair.first+";"+(splitter.length > 2 ? "Type: Answer;":"")+stringStringPair.second);
-        }
-        data.put("Questions",arrayList);
-        docRef.set(data, SetOptions.merge()).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Offer_detail.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
 
@@ -367,19 +370,22 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
 
 
     @Override
-    public void applyTexts(Integer newText, String method) {
+    public void applyTexts(Integer newText, String method,String delivery, String comment) {
         HashMap<String, Object> data = new HashMap<>();
         data.put("UserID", user.getUid());
         data.put("OfferID", offerID.toString());
+        data.put("DeliveryAddress",delivery);
         data.put("Image", startPhoto.toString());
         data.put("Method", method);
         data.put("Title", productName.getText().toString());
         data.put("OriginalPrice", Integer.parseInt(productPrice.getText().toString().replace("€","")));
         data.put("OfferdPrice", newText);
-        data.put("AdditionalComments", "You have got an Offer from: "+user.getDisplayName());
+        data.put("AdditionalComments", comment);
         data.put("State", Offer_Offer_Item.OfferState.asked.toString());
         data.put("LastUpdate", new Date());
         data.put("OwnerID", item.getUID());
+      //  data.put("OwnerToken",)
+       // data.put("MyToken",user.getIdToken())
         CollectionReference colDb = FirebaseFirestore.getInstance().collection("Activities");
         colDb.document().set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

@@ -2,6 +2,8 @@ package com.company.usedado.Java.items;
 
 import android.net.Uri;
 
+import java.util.function.Function;
+
 
 public class Offer_Offer_Item {
     public enum OfferState{
@@ -20,7 +22,27 @@ public class Offer_Offer_Item {
     private String UserID;
     private String OfferID;
     private String ID;
+    private String activityID;
     private String Method;
+    private String address;
+    private String PayAddress;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPayAddress(String payAddress) {
+        PayAddress = payAddress;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPayAddress() {
+        return PayAddress;
+    }
 
     public Offer_Offer_Item(Uri image, String title, int originalPrice, int offerdPrice, String additionalComments, OfferState state, String userID, String offerID, String ID, String method) {
         this.image = image;
@@ -77,5 +99,13 @@ public class Offer_Offer_Item {
 
     public String getMethod() {
         return Method;
+    }
+
+    public String getActivityID() {
+        return activityID;
+    }
+
+    public void setActivityID(String activityID) {
+        this.activityID = activityID;
     }
 }

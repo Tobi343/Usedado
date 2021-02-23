@@ -16,6 +16,7 @@ import com.company.usedado.Java.adapter.YourOfferAdapter;
 import com.company.usedado.Java.items.DashboardBigCardItem;
 import com.company.usedado.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -133,7 +134,15 @@ public class my_offers extends AppCompatActivity {
                             }
                             else {
                                 Toast.makeText(my_offers.this, deletedAdd.getofferID(), Toast.LENGTH_SHORT).show();
-                                db.collection("Offers").document(deletedAdd.getofferID()).delete();
+                                db.collection("Offers").document(deletedAdd.getofferID()).delete().addOnFailureListener(new OnFailureListener() {
+                                                                                                                            @Override
+                                                                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                                                                String message = e.getMessage();
+                                                                                                                                Toast.makeText(my_offers.this, message, Toast.LENGTH_SHORT).show();
+
+                                                                                                                            }
+                                                                                                                        }
+                                );
                             }
 
                         }

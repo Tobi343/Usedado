@@ -114,6 +114,7 @@ public class profile extends AppCompatActivity implements dialog_profile.dialog_
                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                    if (task.isSuccessful()) {
                        DocumentSnapshot document = task.getResult();
+                   try {
                        phone.setText(document.get("phone").toString());
                        ads.setText(document.get("offers").toString());
                        message.setText(document.get("messages").toString());
@@ -123,7 +124,13 @@ public class profile extends AppCompatActivity implements dialog_profile.dialog_
                        Format format = new SimpleDateFormat("MMM dd, yyyy");
                        memberSince.setText(format.format(date));
                        address.setText(document.get("address").toString().split(",")[0]);
-
+                   }
+                   catch (Exception e) {
+                       FirebaseAuth.getInstance().signOut();
+                       Intent intent = new Intent(profile.this, Login_Page.class);
+                       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       startActivity(intent);
+                   }
                    } else {
                        Log.d(TAG, "get failed with ", task.getException());
                    }
@@ -157,13 +164,22 @@ public class profile extends AppCompatActivity implements dialog_profile.dialog_
 
         mStorageRef = FirebaseStorage.getInstance().getReference("UserImage");
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
+     try {
+         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        Picasso.get().load(user.getPhotoUrl()).resize(600, 600) // resizes the image to these dimensions (in pixel)
-                .centerCrop().into(profile_picture);
-        email.setText(user.getEmail());
-        password.setText("ABCDEFGHIJKLMN");
-        name.setText(user.getDisplayName());
+         Picasso.get().load(user.getPhotoUrl()).resize(600, 600) // resizes the image to these dimensions (in pixel)
+                 .centerCrop().into(profile_picture);
+         email.setText(user.getEmail());
+         password.setText("ABCDEFGHIJKLMN");
+         name.setText(user.getDisplayName());
+     }
+     catch (Exception e){
+         FirebaseAuth.getInstance().signOut();
+         Intent intent = new Intent(profile.this, Login_Page.class);
+         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+         startActivity(intent);
+
+     }
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

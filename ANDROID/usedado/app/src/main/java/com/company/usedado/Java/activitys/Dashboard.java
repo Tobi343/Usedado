@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,12 +34,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -56,6 +62,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
     private BottomNavigationView bottomNavigationView;
 
     private TextView name;
+    private TextView refresh;
 
     private AutoCompleteTextView searchBar;
 
@@ -66,6 +73,8 @@ public class Dashboard extends AppCompatActivity implements Serializable {
     private RecyclerView.LayoutManager layoutManager;
 
     private FirebaseUser user;
+
+
 
 
   private static final String TAG = "Dashboard";
@@ -80,7 +89,17 @@ public class Dashboard extends AppCompatActivity implements Serializable {
           user = FirebaseAuth.getInstance().getCurrentUser();
 
           Picasso.get().load(user.getPhotoUrl()).resize(600, 600).centerCrop().into(profile);
-          name.setText("Hallo "+(getIntent().hasExtra("USER_NAME") ? getIntent().getStringExtra("USER_NAME").split(" ")[0].toString() : user.getDisplayName().split(" ")[0].toString())+",");
+          name.setText("Hello "+ (getIntent().hasExtra("USER_NAME") ? getIntent().getStringExtra("USER_NAME").split(" ")[0].toString() : user.getDisplayName().split(" ")[0].toString())+",");
+
+          String providerID = user.getProviderId();
+          Toast.makeText(this, providerID, Toast.LENGTH_SHORT).show();
+
+          for (UserInfo user : user.getProviderData()) {
+              if (user.getProviderId().equals("google.com")){
+                  name.setText("Hello "+user.getDisplayName()+",");
+              }
+          }
+
       }
       else {
           Toast.makeText(this, "Empty my dude", Toast.LENGTH_SHORT).show();
@@ -117,6 +136,22 @@ public class Dashboard extends AppCompatActivity implements Serializable {
           }
       }
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+
+                    }
+                });
+
 
     }
 
@@ -129,6 +164,8 @@ public class Dashboard extends AppCompatActivity implements Serializable {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
+                items.clear();
+                searchItems.clear();
 
                 for (QueryDocumentSnapshot queryDocumentSnapshot :task.getResult()) {
                     Map<String, Object> data = queryDocumentSnapshot.getData();
@@ -167,6 +204,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
         recyclerView1.setLayoutManager(gridLayoutManager);
+
         DashboardBigCardAdapter adapter;
         recyclerView.setAdapter(adapter = new DashboardBigCardAdapter(searchItems));
         adapter.setOnItemClickListner(new DashboardBigCardAdapter.OnItemClickListner() {
@@ -214,7 +252,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
         myAdds = findViewById(R.id.dashboard_btn_my_adds);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         name = findViewById(R.id.dashboard_name);
-
+        refresh = findViewById(R.id.dashboard_refresh);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         searchBar.addTextChangedListener(new TextWatcher() {
@@ -230,15 +268,20 @@ public class Dashboard extends AppCompatActivity implements Serializable {
                     if(item.getName().toLowerCase().contains(s.toString().toLowerCase())){
                         searchItems.add(item);
                     }
-
                 }
                 SetUpRecycler();
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetDataFromFirestore();
             }
         });
 

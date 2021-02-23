@@ -8,11 +8,14 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,18 +33,25 @@ import java.util.Queue;
 public class dialog_offered_price extends AppCompatDialogFragment {
 
     private EditText editText;
-    private RadioGroup linearLayout;
+    private Spinner spinner;
+    private EditText additionalComment;
+    private TextView lastPriceView;
+    private TextView oriPriceView;
+    private TextView title;
+    private EditText address;
     private dialog_offered_price.dialog_offered_price_Listener listener;
     private Integer oriPrice;
     private Integer lastPrice;
+    private String heading;
     private List<String> methods;
 
 
 
-    public dialog_offered_price(Integer oriPrice, Integer lastPrice, List<String> methods){
+    public dialog_offered_price(Integer oriPrice, Integer lastPrice, List<String> methods,String title){
         this.oriPrice = oriPrice;
         this.lastPrice = lastPrice;
         this.methods = methods;
+        heading = title;
     }
 
     @NonNull
@@ -51,7 +61,7 @@ public class dialog_offered_price extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_offered_price,null);
 
-        builder.setView(view).setTitle("What price do you want to offer?").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -64,12 +74,7 @@ public class dialog_offered_price extends AppCompatDialogFragment {
                     Integer newPrice = Integer.parseInt(editText.getText().toString());
                     if (newPrice <= oriPrice) {
                         if (newPrice >= lastPrice) {
-                            View btn = linearLayout.findFocus();
-                            int id = linearLayout.getCheckedRadioButtonId();
-                            id-=3;
-                            String method =methods.get(id%10);
-                            listener.applyTexts(newPrice, method);
-                            linearLayout.removeAllViews();
+                            listener.applyTexts(newPrice, spinner.getSelectedItem().toString(),address.getText().toString(),additionalComment.getText().toString());
                         }
                         else
                             {
@@ -85,23 +90,19 @@ public class dialog_offered_price extends AppCompatDialogFragment {
 
         });
         editText = view.findViewById(R.id.dialog_offered_price_editText);
-        linearLayout = view.findViewById(R.id.dialog_offered_price_llayout);
-        Queue<Integer> ids = new LinkedList<Integer>();
-        ids.add(R.id.layout1);
-        ids.add(R.id.layout2);
-        ids.add(R.id.layout3);
-        ids.add(R.id.layout4);
-        ids.add(R.id.layout5);
-        ids.add(R.id.layout6);
-        ids.add(R.id.layout7);
-        for (String method : methods) {
-            RadioButton button = new RadioButton(getContext());
-            button.setText(method);
+        oriPriceView = view.findViewById(R.id.dialog_offered_price_oriPrice);
+        lastPriceView = view.findViewById(R.id.dialog_offered_price_lastPrice);
+        additionalComment = view.findViewById(R.id.dialog_offered_price_comment);
+        address = view.findViewById(R.id.dialog_offered_price_address);
+        title = view.findViewById(R.id.dialog_offered_price_headline);
+        spinner = view.findViewById(R.id.dialog_offered_price_llayout);
 
-            button.setId(ids.poll());
-            button.setSelected(true);
-            linearLayout.addView(button);
-        }
+        oriPriceView.setText("Original Price: "+oriPrice);
+        lastPriceView.setText("Last Price: "+lastPrice);
+        title.setText(heading);
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, methods);
+        spinner.setAdapter(dataAdapter);
         return builder.create();
     }
 
@@ -116,6 +117,6 @@ public class dialog_offered_price extends AppCompatDialogFragment {
     }
 
     public interface dialog_offered_price_Listener{
-        void applyTexts(Integer newText,String method);
+        void applyTexts(Integer newText,String method, String address, String comment);
     }
 }

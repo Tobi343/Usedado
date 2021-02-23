@@ -1,5 +1,6 @@
 package com.company.usedado.Java.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,24 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.company.usedado.Java.Interfaces.AdapterOfferInter;
 import com.company.usedado.Java.items.Offer_Offer_Item;
 import com.company.usedado.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder> {
 
@@ -27,6 +41,15 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_card,parent,false);
         Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder mvh = new Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder(v);
         return mvh;
+    }
+    private List<AdapterOfferInter> channels = new ArrayList<>();
+
+    public void addObserver(AdapterOfferInter channel) {
+        this.channels.add(channel);
+    }
+
+    public void removeObserver(AdapterOfferInter channel) {
+        this.channels.remove(channel);
     }
 
     @Override
@@ -43,7 +66,9 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
                 public void onClick(View v) {
                     notifyItemRemoved(cards.indexOf(currentItem));
                     currentItem.setState(Offer_Offer_Item.OfferState.rejected);
+                    UpdateItem(currentItem);
                     cards.remove(currentItem);
+
                 }
             });
             holder.buttonAccept.setOnClickListener(new View.OnClickListener() {
@@ -51,17 +76,24 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
                 public void onClick(View v) {
                     notifyItemRemoved(cards.indexOf(currentItem));
                     currentItem.setState(Offer_Offer_Item.OfferState.accepted);
+                    currentItem.setPayAddress("abc");
+                    UpdateItem(currentItem);
                     cards.remove(currentItem);
+
                 }
             });
             holder.buttonPending.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int i = cards.indexOf(currentItem);
-                    notifyItemMoved(i,cards.size()-1);
+                   if(i >= 1){
+                       notifyItemMoved(i,cards.size()-1);
+
+                       cards.set(i, cards.get(cards.size()-1));
+                        cards.set(cards.size()-1, currentItem);
+                   }
                     currentItem.setState(Offer_Offer_Item.OfferState.pending);
-                    cards.set(i, cards.get(cards.size()-1));
-                    cards.set(cards.size()-1, currentItem);
+                    UpdateItem(currentItem);
                 }
             });
             //holder.textView3.setText(currentItem.getAdditionalComments());
@@ -70,9 +102,32 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
         }
     }
 
+    public void UpdateItem(Offer_Offer_Item item){
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Activities").document(item.getActivityID());
+        HashMap<String,Object> data = new HashMap<>();
+        data.put("State",item.getState());
+        if(item.getState().equals(Offer_Offer_Item.OfferState.accepted)){
+            data.put("PaymentAddress",item.getPayAddress());
+        }
+    documentReference.set(data,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                for (AdapterOfferInter channel : channels) {
+                    channel.fetchData();
+                }
+            }
+        });
+
+
+
+    }
+
     public Offer_Offer_Adapter(ArrayList<Offer_Offer_Item> cardList){
         cards = cardList;
     }
+
+
+
 
 
     @Override

@@ -53,7 +53,6 @@ public class DetailQuestionAdapter extends RecyclerView.Adapter<DetailQuestionAd
             holder.textView.setText(splitter[0]);
             holder.textView1.setText(currentItem.second);
 
-
         }
         catch (Exception e){
         }

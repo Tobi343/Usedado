@@ -21,6 +21,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -30,12 +32,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -181,7 +185,13 @@ public class Register_Page extends AppCompatActivity {
      *      @param user The new created FirebaseUser instance
     **/
     public void setRegistration (FirebaseUser user) {
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(NameText.getText().toString()).setPhotoUri(Uri.parse("https://firebasestorage.googleapis.com/v0/b/usedado.appspot.com/o/UserImage%2Fdeafult.jpeg?alt=media&token=70fee5c5-4cb3-4695-9778-8698a50c6c8c")).build();
+       String name = "";
+        for (UserInfo user1 : user.getProviderData()) {
+            //if (user1.getProviderId().equals("google.com")){
+            name = user1.getDisplayName();
+            //}
+        }
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(NameText.getText().toString().equals("")?name:NameText.getText().toString()).setPhotoUri(Uri.parse("https://firebasestorage.googleapis.com/v0/b/usedado.appspot.com/o/UserImage%2Fdeafult.jpeg?alt=media&token=70fee5c5-4cb3-4695-9778-8698a50c6c8c")).build();
         user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -190,27 +200,54 @@ public class Register_Page extends AppCompatActivity {
                         }
                     }
                 });
-        HashMap<String,Object> data = new HashMap<>();
-        data.put("address", "unknown");
-        data.put("phone", "unknown");
-        data.put("ads", "0");
-        data.put("messages", "0");
-        data.put("offers", "0");
-        data.put("favourites", new ArrayList<String>());
-        data.put("number", "#"+ ++UserCount);
-        data.put("profilePicture",  profileUpdates.getPhotoUri().toString());
-        data.put("name",  profileUpdates.getDisplayName());
 
-        CollectionReference colDb = FirebaseFirestore.getInstance().collection("Users");
-        colDb.document(user.getUid()).set(data);
 
-        data = new HashMap<>();
-        data.put("NumberOfUsers", UserCount);
-        colDb = FirebaseFirestore.getInstance().collection("Users");
-        colDb.document("Adminpanel").set(data, SetOptions.merge());
-        Map<String,String> data1 = new HashMap<>();
-        data1.put( "USER_NAME",NameText.getText().toString());
-        finishedProcess(data1);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        HashMap<String,Object> data = new HashMap<>();
+                        data.put("address", "unknown");
+                        data.put("phone", "unknown");
+                        data.put("ads", "0");
+                        data.put("messages", "0");
+                        data.put("offers", "0");
+                        data.put("favourites", new ArrayList<String>());
+                        data.put("number", "#"+ ++UserCount);
+                        data.put("token",token);
+                        data.put("profilePicture",  profileUpdates.getPhotoUri().toString());
+                        for (UserInfo user1 : user.getProviderData()) {
+                            //if (user1.getProviderId().equals("google.com")){
+                            data.put("name",  user1.getDisplayName());
+                            //}
+                        }
+                        if(!data.containsKey("name")||data.get("name")== null) {
+                            data.put("name", profileUpdates.getDisplayName());
+                        }
+
+
+
+                        CollectionReference colDb = FirebaseFirestore.getInstance().collection("Users");
+                        colDb.document(user.getUid()).set(data);
+
+                        data = new HashMap<>();
+                        data.put("NumberOfUsers", UserCount);
+                        colDb = FirebaseFirestore.getInstance().collection("Users");
+                        colDb.document("Adminpanel").set(data, SetOptions.merge());
+                        Map<String,String> data1 = new HashMap<>();
+                        data1.put( "USER_NAME",NameText.getText().toString());
+                        finishedProcess(data1);
+                    }
+                });
+
+
     }
 
     public void GetAdminPanel(){
@@ -240,7 +277,7 @@ public class Register_Page extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success
                             Log.d(TAG, "signInWithCredential:success");
-                            GetAdminPanel();
+                                    GetAdminPanel();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
