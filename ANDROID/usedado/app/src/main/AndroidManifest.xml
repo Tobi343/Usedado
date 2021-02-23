@@ -24,7 +24,8 @@
             android:resource="@color/colorAccent" />
 
 
-        <activity android:name=".Java.activitys.CategorieView" />
+        <activity android:name=".Java.activitys.CategorieView"
+            android:theme="@style/AppTheme2"/>
         <activity
             android:name=".Java.activitys.activity_offerActivitys"
             android:theme="@style/AppTheme2" />
@@ -76,13 +77,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
 
-        <service
+       <!-- <service
             android:name=".Java.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
+        </service>-->
     </application>
 
 </manifest>

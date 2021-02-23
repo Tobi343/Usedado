@@ -76,7 +76,7 @@ public class fragment_activities_time extends Fragment implements AdapterOfferIn
                 },2000);
             }
         });
-         adapter= new Offer_Offer_Adapter(activites);
+         adapter= new Offer_Offer_Adapter(activites,getFragmentManager());
          adapter.addObserver(this::fetchData);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

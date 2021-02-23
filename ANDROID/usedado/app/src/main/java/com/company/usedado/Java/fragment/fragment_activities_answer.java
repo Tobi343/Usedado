@@ -165,6 +165,7 @@ public class fragment_activities_answer extends Fragment {
                                 data.get("Method").toString()));
                         try {
                             item.setPayAddress(data.get("PaymentAddress").toString());
+
                         }
                         catch (Exception e){
 

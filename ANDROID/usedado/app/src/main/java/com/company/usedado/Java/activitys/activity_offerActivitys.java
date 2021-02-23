@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.company.usedado.Java.Interfaces.AdapterOfferInter;
 import com.company.usedado.Java.adapter.ViewPagerAdapter;
+import com.company.usedado.Java.dialogs.dialog_finish;
+import com.company.usedado.Java.dialogs.dialog_profile;
 import com.company.usedado.Java.fragment.fragment_activities_answer;
 import com.company.usedado.Java.fragment.fragment_activities_group;
 import com.company.usedado.Java.fragment.fragment_activities_time;
@@ -23,14 +26,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
-public class activity_offerActivitys extends AppCompatActivity {
+public class activity_offerActivitys extends AppCompatActivity implements dialog_finish.dialog_finish_Listener {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -122,16 +128,23 @@ public class activity_offerActivitys extends AppCompatActivity {
         });
     }
 
-    public void onItemClicks(DashboardBigCardItem item) {
-        Intent intent = new Intent(getApplicationContext(), Offer_detail.class);
-        intent.putExtra("PRODUCT_NAME",item.getName());
-        intent.putExtra("PRODUCT_URI",item.getImageResource().toString());
-        intent.putExtra("PRODUCT_PRICE",item.getPrice());
-        intent.putExtra("PRODUCT_USER",item.getUID());
-        intent.putExtra("PRODUCT_DELIVERYPRICE",item.getDeliveryPrice());
-        intent.putExtra("PRODUCT_IMAGES",item.getImages());
-        intent.putExtra("PRODUCT_DESC",item.getDescribtion());
-        intent.putExtra("PRODUCT_ID",item.getofferID());
-        startActivity(intent);
+
+
+    @Override
+    public void applyTexts(String newText, String title, Offer_Offer_Item item) {
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Activities").document(item.getActivityID());
+        item.setPayAddress(newText);
+        HashMap<String,Object> data = new HashMap<>();
+        data.put("State",item.getState());
+        if(item.getState().equals(Offer_Offer_Item.OfferState.accepted)){
+            data.put("PaymentAddress",title);
+        }
+        documentReference.set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+
+            }
+        });
     }
 }

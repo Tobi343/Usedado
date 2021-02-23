@@ -10,9 +10,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.company.usedado.Java.Interfaces.AdapterOfferInter;
+import com.company.usedado.Java.dialogs.dialog_finish;
+import com.company.usedado.Java.dialogs.dialog_profile;
 import com.company.usedado.Java.items.Offer_Offer_Item;
 import com.company.usedado.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,10 +35,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder> {
+public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder> implements dialog_profile.dialog_profile_Listener {
 
     private ArrayList<Offer_Offer_Item> cards = new ArrayList<Offer_Offer_Item>();
-
+    private Offer_Offer_Item currentItem;
+    FragmentManager fm;
     @NonNull
     @Override
     public Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,12 +59,12 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
 
     @Override
     public void onBindViewHolder(@NonNull Offer_Offer_Adapter.Offer_Offer_AdapterViewHolder holder, int position) {
-        Offer_Offer_Item currentItem = cards.get(position);
+        currentItem = cards.get(position);
         try {
             Picasso.get().load(currentItem.getImage()).into(holder.imageView);
             holder.textView.setText(currentItem.getTitle());
             holder.textView1.setText("Original Price:  "+currentItem.getOriginalPrice());
-            holder.textView2.setText("Offerd Price:     "+currentItem.getOfferdPrice());
+            holder.textView2.setText("Offerd Price:    "+currentItem.getOfferdPrice());
             holder.textView3.setText("via. "+currentItem.getMethod());
             holder.buttonReject.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,8 +81,10 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
                 public void onClick(View v) {
                     notifyItemRemoved(cards.indexOf(currentItem));
                     currentItem.setState(Offer_Offer_Item.OfferState.accepted);
-                    currentItem.setPayAddress("abc");
-                    UpdateItem(currentItem);
+                    //currentItem.setPayAddress("abc");
+                    //UpdateItem(currentItem);
+                    dialog_finish dp = new dialog_finish(currentItem);
+                    dp.show(fm,"example Dialog");
                     cards.remove(currentItem);
 
                 }
@@ -122,8 +129,9 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
 
     }
 
-    public Offer_Offer_Adapter(ArrayList<Offer_Offer_Item> cardList){
+    public Offer_Offer_Adapter(ArrayList<Offer_Offer_Item> cardList, FragmentManager manager){
         cards = cardList;
+        fm = manager;
     }
 
 
@@ -135,7 +143,13 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
         return cards.size();
     }
 
-    public static class Offer_Offer_AdapterViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public void applyTexts(String newText, String title) {
+
+
+    }
+
+    public static class Offer_Offer_AdapterViewHolder extends RecyclerView.ViewHolder implements dialog_profile.dialog_profile_Listener{
 
         public ImageView imageView;
         public TextView textView;
@@ -159,6 +173,10 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
 
         }
 
+        @Override
+        public void applyTexts(String newText, String title) {
+            Toast.makeText(itemView.getContext(), "avcx", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

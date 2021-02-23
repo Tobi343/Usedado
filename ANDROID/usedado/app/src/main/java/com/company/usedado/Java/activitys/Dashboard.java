@@ -222,6 +222,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
             }
         });
         ArrayList<CatagorieItem> catagorieItems = new ArrayList<CatagorieItem>();
+       // {"Books","Clothes","Games","Vehicles","Jewellery","Cameras","Instruments","Household","Phones","Toys"}
         catagorieItems.add(new CatagorieItem(R.drawable.book,"Books",getResources().getColor(R.color.main_font)));
         catagorieItems.add(new CatagorieItem(R.drawable.clothes_hanger,"Clothes",getResources().getColor(R.color.main_orange)));
         catagorieItems.add(new CatagorieItem(R.drawable.gamepad,"Games",getResources().getColor(R.color.colorLighterGreen)));
@@ -230,7 +231,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
         catagorieItems.add(new CatagorieItem(R.drawable.kamera,"Cameras",getResources().getColor(R.color.colorPurple)));
         catagorieItems.add(new CatagorieItem(R.drawable.guitar,"Instruments",getResources().getColor(R.color.colorBlack)));
         catagorieItems.add(new CatagorieItem(R.drawable.haus,"Household",getResources().getColor(R.color.colorBrown)));
-        catagorieItems.add(new CatagorieItem(R.drawable.smartphone,"Smarthpones",getResources().getColor(R.color.colorYellowGreen)));
+        catagorieItems.add(new CatagorieItem(R.drawable.smartphone,"Phones",getResources().getColor(R.color.colorYellowGreen)));
         catagorieItems.add(new CatagorieItem(R.drawable.toy,"Toys",getResources().getColor(R.color.colorPink)));
 
 
@@ -241,6 +242,14 @@ public class Dashboard extends AppCompatActivity implements Serializable {
 
         CatagorieAdapter adapter2;
         recyclerView2.setAdapter(adapter2 = new CatagorieAdapter(catagorieItems));
+        adapter2.setOnItemClickListner(new CatagorieAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getApplicationContext(),CategorieView.class);
+                intent.putExtra("Title",catagorieItems.get(position).getTextCat());
+                startActivity(intent);
+            }
+        });
 
     }
 

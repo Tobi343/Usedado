@@ -297,20 +297,22 @@
                     android:text="Category"
                     android:layout_height="wrap_content">
                 </TextView>
-                <EditText
+                <Spinner
                     android:layout_width="match_parent"
                     android:background="@drawable/input_round"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:hint="Category"
                     android:textSize="16dp"
                     android:padding="12dp"
+
                     android:textColor="@color/midGrey"
                     android:textStyle="bold"
-                    android:drawableRight="@drawable/ic_baseline_category_24"
-                    android:drawableTint="@color/midGrey"
                     android:id="@+id/offer_add_text_category"
 
-                    ></EditText>
+
+
+                    ></Spinner>
+
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

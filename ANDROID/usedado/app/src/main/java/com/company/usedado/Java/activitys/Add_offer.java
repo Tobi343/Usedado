@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +46,11 @@ import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class Add_offer extends AppCompatActivity {
@@ -59,7 +64,7 @@ public class Add_offer extends AppCompatActivity {
     private EditText describtion;
     private EditText name;
     private EditText price;
-    private EditText catagory;
+    private Spinner catagory;
     private EditText otherPaymentMethod;
     private EditText deliveryPrice;
     private EditText lastPrice;
@@ -87,6 +92,7 @@ public class Add_offer extends AppCompatActivity {
     ArrayList<String> allowedPayments;
     ArrayList<String> picList;
     ArrayList<String> paymentMethods;
+    List<String> categorys = new ArrayList<>(Arrays.asList("Books","Clothes","Games","Vehicles","Jewellery","Cameras","Instruments","Household","Phones","Toys"));
 
 
     @Override
@@ -106,7 +112,7 @@ public class Add_offer extends AppCompatActivity {
             picList.add(0,image);
         }
         adapter.notifyDataSetChanged();
-        catagory.setText(item.getTopic());
+        catagory.setSelection(categorys.indexOf(item.getTopic()));
         price.setText(item.getPrice().replace("€",""));
         describtion.setText(item.getDescribtion());
         name.setText(item.getName());
@@ -144,6 +150,9 @@ public class Add_offer extends AppCompatActivity {
         otherPaymentMethod = findViewById(R.id.offer_add_text_apm_else);
         radioGroup = findViewById(R.id.offer_add_radio_group);
         lastPriceLayout = findViewById(R.id.offer_add_last_price_layout);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,categorys);
+
+        catagory.setAdapter(aa);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -173,7 +182,7 @@ public class Add_offer extends AppCompatActivity {
                 HashMap<String, Object> data = new HashMap<>();
                 data.put("User", user.getDisplayName());
                 data.put("Name", name.getText().toString());
-                data.put("Catagory", catagory.getText().toString());
+                data.put("Catagory", catagory.getSelectedItem().toString());
                 data.put("Price", price.getText().toString());
                 data.put("DeliveryPrice", deliveryPrice.getText().toString());
                 data.put("Describtion", describtion.getText().toString());
