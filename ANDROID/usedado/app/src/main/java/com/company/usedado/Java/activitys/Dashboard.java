@@ -225,7 +225,19 @@ public class Dashboard extends AppCompatActivity implements Serializable {
         catagorieItems.add(new CatagorieItem(R.drawable.book,"Books",getResources().getColor(R.color.main_font)));
         catagorieItems.add(new CatagorieItem(R.drawable.clothes_hanger,"Clothes",getResources().getColor(R.color.main_orange)));
         catagorieItems.add(new CatagorieItem(R.drawable.gamepad,"Games",getResources().getColor(R.color.colorLighterGreen)));
+        catagorieItems.add(new CatagorieItem(R.drawable.car,"Vehicles",getResources().getColor(R.color.colorTurquoise)));
+        catagorieItems.add(new CatagorieItem(R.drawable.ring,"Jewellery",getResources().getColor(R.color.colorLightRed)));
+        catagorieItems.add(new CatagorieItem(R.drawable.kamera,"Cameras",getResources().getColor(R.color.colorPurple)));
+        catagorieItems.add(new CatagorieItem(R.drawable.guitar,"Instruments",getResources().getColor(R.color.colorBlack)));
+        catagorieItems.add(new CatagorieItem(R.drawable.haus,"Household",getResources().getColor(R.color.colorBrown)));
+        catagorieItems.add(new CatagorieItem(R.drawable.smartphone,"Smarthpones",getResources().getColor(R.color.colorYellowGreen)));
+        catagorieItems.add(new CatagorieItem(R.drawable.toy,"Toys",getResources().getColor(R.color.colorPink)));
 
+
+        //ICON,NAME,FARBE
+       // catagorieItems.add(new CatagorieItem(R.drawable.gamepad,"Games",getResources().getColor(R.color.colorLighterGreen)));
+
+        //Klein geschrieben, kein abstand, Filename
 
         CatagorieAdapter adapter2;
         recyclerView2.setAdapter(adapter2 = new CatagorieAdapter(catagorieItems));
