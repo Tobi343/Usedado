@@ -34,7 +34,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:text="Erstelle jetzt deine erste Anzeige"
+                        android:text="Crerate your first listing"
                         android:textColor="@color/colorDarkWhite"
                         android:textSize="15dp"
                         ></TextView>
@@ -92,7 +92,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="80dp"
-                    android:text="MY ADDs"
+                    android:text="MY ADs"
                     android:id="@+id/dashboard_btn_my_adds"
                     android:textColor="@color/colorWhite"
                     android:background="@drawable/green_gradient"
@@ -124,7 +124,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:text="Empfehlungen"
+                    android:text="Suggestions"
                     android:layout_marginLeft="20dp"
                     android:textStyle="bold"
                     android:textSize="20dp"
@@ -147,7 +147,7 @@
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
-                android:text="Kategorien"
+                android:text="Categories"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"

@@ -5,7 +5,7 @@
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
-        android:text="Enter your Payment Informations"
+        android:text="Enter your Payment Information"
         android:textSize="20dp"            android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
 
@@ -40,7 +40,7 @@
         android:id="@+id/dialog_last_details_address"
         android:background="@color/LightGrey"
         android:layout_margin="10dp"
-        android:hint="Payment informations"
+        android:hint="Payment information"
         android:padding="10dp"
         android:layout_height="wrap_content" />
 

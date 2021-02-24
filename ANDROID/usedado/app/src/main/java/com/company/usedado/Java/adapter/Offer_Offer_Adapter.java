@@ -64,7 +64,7 @@ public class Offer_Offer_Adapter extends RecyclerView.Adapter<Offer_Offer_Adapte
             Picasso.get().load(currentItem.getImage()).into(holder.imageView);
             holder.textView.setText(currentItem.getTitle());
             holder.textView1.setText("Original Price:  "+currentItem.getOriginalPrice());
-            holder.textView2.setText("Offerd Price:    "+currentItem.getOfferdPrice());
+            holder.textView2.setText("Offered Price:   "+currentItem.getOfferdPrice());
             holder.textView3.setText("via. "+currentItem.getMethod());
             holder.buttonReject.setOnClickListener(new View.OnClickListener() {
                 @Override

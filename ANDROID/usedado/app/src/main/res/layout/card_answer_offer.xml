@@ -13,7 +13,7 @@
             android:drawableRight="@drawable/ic_baseline_delete_24"
             android:layout_marginRight="5dp"
             android:id="@+id/delete_answer"
-            android:text="Vendor accepted yor deal:"
+            android:text="Vendor accepted your deal:"
             android:textSize="20dp"            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
 
@@ -60,7 +60,7 @@
             ></TextView>
         <TextView
             android:layout_width="match_parent"
-            android:text="The deal is in now finished! The Team from Usedado has no impact on the further actions! We hope you had a good experience with your purchase and hope you could give us a good review! :)"
+            android:text="The deal is in now finished! The Team from Usedado has no impact on further actions! We hope you have had a good experience with your purchase and hope you could give us a good review! :)"
             android:layout_marginLeft="10dp"
             android:textSize="12dp"
             android:layout_height="wrap_content">

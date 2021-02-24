@@ -38,7 +38,7 @@ public class acceptedOfferCardAdapter extends RecyclerView.Adapter<acceptedOffer
     public void onBindViewHolder(@NonNull acceptedOfferCardAdapter.acceptedOfferCardAdapterViewHolder holder, int position) {
         Offer_Offer_Item currentItem = cards.get(position);
         try {
-            holder.textView.setText("Address: "+currentItem.getAddress()+" \nTitle: "+currentItem.getTitle()+"\nPayment: "+ currentItem.getMethod() +"\nPrice: "+currentItem.getOfferdPrice()+"\n Comment: "+currentItem.getAdditionalComments());
+            holder.textView.setText("Address: "+currentItem.getAddress()+" \nTitle: "+currentItem.getTitle()+"\nPayment: "+ currentItem.getMethod() +"\nPrice: "+currentItem.getOfferdPrice()+"\nComment: "+currentItem.getAdditionalComments());
 
         }
         catch (Exception e){

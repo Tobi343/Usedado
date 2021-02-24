@@ -197,7 +197,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Describtion"
+                        android:text="Description"
                         android:textAllCaps="true"
                         android:textSize="16dp"
                         android:textStyle="bold"
@@ -218,7 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_height="wrap_content"
-                        android:text="Allowed Payments"
+                        android:text="Supported Payment Methods"
                         android:textAllCaps="true"
                         android:textSize="16dp"
                         android:textStyle="bold"

@@ -57,6 +57,7 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
         setContentView(R.layout.activity_login__page);
 
 
+
         // Configure Google Sign In
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -64,7 +65,6 @@ public class Login_Page extends AppCompatActivity implements dialog_profile.dial
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
