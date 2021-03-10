@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/main_font"
+    android:background="#2B1D5A"
 
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="wrap_content"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content"
@@ -35,6 +35,13 @@
             android:gravity="center_horizontal">
 
         </TextView>
-    </LinearLayout>
+    </LinearLayout>-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:src="@drawable/logo"
+        android:layout_centerInParent="true"
+        ></ImageView>
 
 </RelativeLayout>
