@@ -62,6 +62,7 @@ public class fragment_activities_time extends Fragment implements AdapterOfferIn
             }
         }
         v = inflater.inflate(R.layout.fragment_view_time,container,false);
+
         recyclerView = v.findViewById(R.id.fragment_view_time_recycler_view);
         swipeRefreshLayout = v.findViewById(R.id.time_swiper);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

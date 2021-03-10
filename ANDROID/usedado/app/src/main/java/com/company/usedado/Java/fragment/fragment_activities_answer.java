@@ -135,7 +135,6 @@ public class fragment_activities_answer extends Fragment {
                     }).show();
                     break;
                 case ItemTouchHelper.RIGHT:
-                    //TODO bearbeitung öffnen....modify add_offer to reuse
                     break;
             }
         }
@@ -177,15 +176,20 @@ public class fragment_activities_answer extends Fragment {
                     }
 
                 }
-                for (int i = 0; i < activites.size() - 1; i++) {
-                    if (activites.get(i).getState().equals(Offer_Offer_Item.OfferState.accepted)) {
+              try {
+                  for (int i = 0; i < activites.size() ; i++) {
+                      if (activites.get(i).getState().equals(Offer_Offer_Item.OfferState.accepted) || activites.get(i).getState().equals(Offer_Offer_Item.OfferState.rejected)) {
 
-                    }
-                    else{
-                        activites.remove(i);
-                        i--;
-                    }
-                }
+                      }
+                      else{
+                          activites.remove(i);
+                          i--;
+                      }
+                  }
+              }
+              catch (Exception e){
+                  Toast.makeText(null, e.getMessage(), Toast.LENGTH_SHORT).show();
+              }
                 adapter.notifyDataSetChanged();
             }
         }).addOnFailureListener(new OnFailureListener() {

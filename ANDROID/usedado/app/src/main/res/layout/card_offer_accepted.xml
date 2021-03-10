@@ -15,7 +15,6 @@
             android:textStyle="bold"
             android:textColor="@color/main_blue"
             android:layout_margin="10dp"
-
             ></TextView>
 
         <TextView
@@ -28,6 +27,16 @@
             android:id="@+id/offer_accepted_text"
 
             ></TextView>
+        <TextView
+            android:layout_width="100dp"
+            android:text="DELETE"
+            android:layout_margin="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/main_red"
+            android:id="@+id/delete_accepted_offer_info"
+            android:drawableRight="@drawable/ic_baseline_delete_24"
+            android:layout_height="wrap_content"></TextView>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

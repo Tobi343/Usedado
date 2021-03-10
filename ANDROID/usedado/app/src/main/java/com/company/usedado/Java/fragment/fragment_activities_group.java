@@ -60,7 +60,7 @@ public class fragment_activities_group extends Fragment implements AdapterOfferI
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        for (int i = 0; i < activites.size() - 1; i++) {
+        for (int i = 0; i < activites.size(); i++) {
             if (activites.get(i).getState().equals(Offer_Offer_Item.OfferState.accepted)) {
 
             }
@@ -121,7 +121,7 @@ public class fragment_activities_group extends Fragment implements AdapterOfferI
                     }
 
                 }
-                for (int i = 0; i < activites.size() - 1; i++) {
+                for (int i = 0; i < activites.size(); i++) {
                     if (activites.get(i).getState().equals(Offer_Offer_Item.OfferState.accepted)) {
 
                     }

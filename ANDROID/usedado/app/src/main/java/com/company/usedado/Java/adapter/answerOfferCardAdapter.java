@@ -1,5 +1,6 @@
 package com.company.usedado.Java.adapter;
 
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,14 +8,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.company.usedado.Java.activitys.my_offers;
 import com.company.usedado.Java.items.Offer_Offer_Item;
 import com.company.usedado.R;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -37,6 +41,31 @@ public class answerOfferCardAdapter extends RecyclerView.Adapter<answerOfferCard
             holder.textView.setText(currentItem.getTitle());
             holder.textView1.setText(currentItem.getPayAddress());
             holder.textView2.setText("Method: "+ currentItem.getMethod() +"\nPrice: "+currentItem.getOfferdPrice());
+            holder.textView3.setText("Vendor "+currentItem.getState()+" your deal:");
+            holder.textView3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(holder.itemView.getContext()).setTitle("Delete Answer")
+                            .setMessage("Do you really want to delete this Answer? You cant undo this action!")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    FirebaseFirestore.getInstance().collection("Activities").document(currentItem.getActivityID()).delete().addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            String message = e.getMessage();
+                                            Toast.makeText(holder.itemView.getContext(), message, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            notifyItemRemoved(position);
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null).setIcon(android.R.drawable.ic_dialog_info).show();
+                }
+            });
             /*holder.textView3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.core.view.ViewCompat;
 
+import com.company.usedado.Java.items.Offer_Offer_Item;
 import com.company.usedado.R;
 
 import java.util.ArrayList;
@@ -35,7 +37,6 @@ public class dialog_offered_price extends AppCompatDialogFragment {
     private EditText editText;
     private Spinner spinner;
     private EditText additionalComment;
-    private TextView lastPriceView;
     private TextView oriPriceView;
     private TextView title;
     private EditText address;
@@ -72,33 +73,19 @@ public class dialog_offered_price extends AppCompatDialogFragment {
                 //TODO add that dialog is not closed when entering invalid input
                 if (!editText.getText().toString().isEmpty()) {
                     Integer newPrice = Integer.parseInt(editText.getText().toString());
-                    if (newPrice <= oriPrice) {
-                        if (newPrice >= lastPrice) {
-                            listener.applyTexts(newPrice, spinner.getSelectedItem().toString(),address.getText().toString(),additionalComment.getText().toString());
-                        }
-                        else
-                            {
-                                editText.setText(lastPrice.toString());
-                                Toast.makeText(getContext(), "Last Price is " + lastPrice, Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            editText.setText(oriPrice.toString());
-                            Toast.makeText(getContext(), "Price is " + oriPrice, Toast.LENGTH_SHORT).show();
-                        }
-                    } else Toast.makeText(getContext(), "EMPTY", Toast.LENGTH_SHORT).show();
-                }
+                    listener.applyTexts(newPrice, spinner.getSelectedItem().toString(),address.getText().toString(),additionalComment.getText().toString(),lastPrice);
+                } else Toast.makeText(getContext(), "EMPTY", Toast.LENGTH_SHORT).show();
+            }
 
         });
         editText = view.findViewById(R.id.dialog_offered_price_editText);
         oriPriceView = view.findViewById(R.id.dialog_offered_price_oriPrice);
-        lastPriceView = view.findViewById(R.id.dialog_offered_price_lastPrice);
         additionalComment = view.findViewById(R.id.dialog_offered_price_comment);
         address = view.findViewById(R.id.dialog_offered_price_address);
         title = view.findViewById(R.id.dialog_offered_price_headline);
         spinner = view.findViewById(R.id.dialog_offered_price_llayout);
 
         oriPriceView.setText("Original Price: "+oriPrice);
-        lastPriceView.setText("Last Price: "+lastPrice);
         title.setText(heading);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, methods);
@@ -117,6 +104,6 @@ public class dialog_offered_price extends AppCompatDialogFragment {
     }
 
     public interface dialog_offered_price_Listener{
-        void applyTexts(Integer newText,String method, String address, String comment);
+        void applyTexts(Integer newText, String method, String address, String comment, Integer lastPrice);
     }
 }

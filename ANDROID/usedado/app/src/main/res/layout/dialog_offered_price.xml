@@ -44,15 +44,7 @@
         android:padding="10dp"
         android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:text="Last Price: 20€"
-            android:id="@+id/dialog_offered_price_lastPrice"
-            android:layout_marginLeft="20dp"
-            android:layout_height="wrap_content">
 
-        </TextView>
         <TextView
             android:text="Original Price: 30€"
             android:layout_weight="1"

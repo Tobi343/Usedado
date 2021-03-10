@@ -370,7 +370,8 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
 
 
     @Override
-    public void applyTexts(Integer newText, String method,String delivery, String comment) {
+    public void applyTexts(Integer newText, String method,String delivery, String comment,Integer lastPrice) {
+
         HashMap<String, Object> data = new HashMap<>();
         data.put("UserID", user.getUid());
         data.put("OfferID", offerID.toString());
@@ -381,7 +382,7 @@ public class Offer_detail extends AppCompatActivity implements OnMapReadyCallbac
         data.put("OriginalPrice", Integer.parseInt(productPrice.getText().toString().replace("€","")));
         data.put("OfferdPrice", newText);
         data.put("AdditionalComments", comment);
-        data.put("State", Offer_Offer_Item.OfferState.asked.toString());
+        data.put("State", lastPrice>newText?Offer_Offer_Item.OfferState.rejected.toString(): Offer_Offer_Item.OfferState.asked.toString());
         data.put("LastUpdate", new Date());
         data.put("OwnerID", item.getUID());
       //  data.put("OwnerToken",)
