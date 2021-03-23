@@ -25,22 +25,13 @@
                 android:layout_margin="20dp"
                 android:layout_height="wrap_content">
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_height="80dp"
-                    android:text="Watchlist"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/green_gradient"
-                    android:layout_marginHorizontal="5dp"
-                    ></Button>
+
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_height="80dp"
+                    android:layout_height="50dp"
                     android:id="@+id/myAuctions"
                     android:text="My AUctions"
                     android:textColor="@color/colorWhite"
@@ -54,6 +45,7 @@
             android:layout_width="match_parent"
                 android:id="@+id/auctionRecycler"
             android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
                 ></androidx.recyclerview.widget.RecyclerView></LinearLayout>
     </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -73,7 +65,7 @@
         android:layout_marginRight="20dp"
          />
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/bottom_navigation_auction"
         android:background="@color/colorWhite"
         app:itemIconTint="@color/main_font"
         app:itemTextColor="@color/main_font"

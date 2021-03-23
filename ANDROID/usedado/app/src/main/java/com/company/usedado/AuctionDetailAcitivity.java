@@ -27,6 +27,8 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -60,7 +62,7 @@ public class AuctionDetailAcitivity extends AppCompatActivity {
         endTime.setText(item.getEndTime());
         title.setText(item.getName());
         desc.setText(item.getDescribtion());
-        Picasso.get().load(item.getImage()).into(image);
+        Picasso.get().load(item.getImage()).fit().into(image);
 
         final int[] value = {item.getRecentPrice()};
 
@@ -92,7 +94,39 @@ public class AuctionDetailAcitivity extends AppCompatActivity {
 
         tickerView.setText(item.getRecentPrice()+"€");
 
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                while (!isInterrupted()){
+                    try {
+                        Thread.sleep(1000);
 
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Date date = null;
+                                try {
+                                    date = new SimpleDateFormat("yyyy/MM/dd/hh:mm").parse(item.getEndTime());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                Date date1 = new Date();
+                                long diff =  date.getTime()-date1.getTime();
+                                int numOfDays = (int) (diff / (1000 * 60 * 60 * 24));
+                                int hours = (int) (diff / (1000 * 60 * 60));
+                                int minutes = (int) (diff / (1000 * 60));
+                                int seconds = (int) (diff / (1000));
+                                endTime.setText((hours-1)+"h "+minutes%60+"m "+seconds%60+"s");
+                            }
+                        });
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        t.start();
 
 
         FirebaseDatabase.getInstance().getReference().child("Auction/"+item.getAuctionID()).addChildEventListener(new ChildEventListener() {

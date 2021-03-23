@@ -19,7 +19,7 @@ android:id="@+id/auctionDetailImage"
            android:layout_width="match_parent"
             android:background="@color/quantum_grey"
            android:src="@drawable/images"
-           android:layout_height="wrap_content">
+           android:layout_height="240dp">
 
        </ImageView>
        <LinearLayout

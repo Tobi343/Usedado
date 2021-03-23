@@ -6,9 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.company.usedado.Java.activitys.Add_offer;
 import com.company.usedado.Java.activitys.Offer_detail;
+import com.company.usedado.Java.adapter.CategoryAdapterCardView;
 import com.company.usedado.Java.adapter.YourOfferAdapter;
 import com.company.usedado.Java.items.DashboardBigCardItem;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,11 +24,18 @@ import com.google.gson.Gson;
 import xyz.danoz.recyclerviewfastscroller.sectionindicator.AbsSectionIndicator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import xyz.danoz.recyclerviewfastscroller.sectionindicator.SectionIndicator;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 public class advancedSearch extends AppCompatActivity {
+
+    List<String> categorys = new ArrayList<>(Arrays.asList("Title","Price"));
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +47,46 @@ public class advancedSearch extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewSearch);
         VerticalRecyclerViewFastScroller fastScroller = findViewById(R.id.fast_scroller);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        YourOfferAdapter adapter = new YourOfferAdapter(items);
+        CategoryAdapterCardView adapter = new CategoryAdapterCardView(items);
         recyclerView.setAdapter(adapter);
+        Spinner spinner = findViewById(R.id.sortSpinner);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,categorys);
+
+        spinner.setAdapter(aa);
+        Collections.sort(items, new Comparator<DashboardBigCardItem>() {
+            @Override
+            public int compare(DashboardBigCardItem o1, DashboardBigCardItem o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    Collections.sort(items, new Comparator<DashboardBigCardItem>() {
+                        @Override
+                        public int compare(DashboardBigCardItem o1, DashboardBigCardItem o2) {
+                            return o1.getName().compareTo(o2.getName());
+                        }
+                    });
+                }
+                else{
+                    Collections.sort(items, new Comparator<DashboardBigCardItem>() {
+                        @Override
+                        public int compare(DashboardBigCardItem o1, DashboardBigCardItem o2) {
+                            return o1.getPrice().replace("€","").compareTo(o2.getPrice().replace("€",""));
+                        }
+                    });
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         // Connect the recycler to the scroller (to let the scroller scroll the list)
         fastScroller.setRecyclerView(recyclerView);
@@ -61,7 +111,7 @@ public class advancedSearch extends AppCompatActivity {
         });
 
 
-        adapter.setOnItemClickListner(new YourOfferAdapter.OnItemClickListner() {
+        adapter.setOnItemClickListner(new CategoryAdapterCardView.OnItemClickListner() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getApplicationContext(), Offer_detail.class);
@@ -89,8 +139,7 @@ public class advancedSearch extends AppCompatActivity {
                             (ArrayList<String>)document.get("AllowedPayments")));
 
                 }
-                items.addAll(items);
-                items.addAll(items);
+
 
                 adapter.notifyDataSetChanged();
             }

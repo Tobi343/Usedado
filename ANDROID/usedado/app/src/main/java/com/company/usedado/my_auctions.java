@@ -50,7 +50,6 @@ public class my_auctions extends AppCompatActivity {
         recyclerView = findViewById(R.id.your_auction_recycler_view);
         user = FirebaseAuth.getInstance().getCurrentUser();
         GetData();
-
     }
 
     public void GetData()  {
@@ -69,16 +68,21 @@ public class my_auctions extends AppCompatActivity {
                         for (String s : items.keySet()) {
                             Map<String, Object> value = items.get(s);
 
-                           // Map<String,Object> owner = (Map<String, Object>) value.get("firebaseUser");
-                            //    public AuctionItem(String name, String auctionID, String startTime, String endTime, int startPrice, int recentPrice, String describtion, String image, FirebaseUser recentBidUser) {
+                        try {
+                            Map<String,Object> owner = (Map<String, Object>) value.get("firebaseUser");
+                            if(owner.get("UID").toString().equals(user.getUid())){
+                                items1.add(new AuctionItem(value.get("Name").toString(), s,
+                                        value.get("startTime").toString(),
+                                        value.get("endTime").toString()
+                                        , Integer.parseInt(value.get("startPrice").toString()), Integer.parseInt(value.get("recentPrice").toString()), value.get("Describtion").toString(), value.get("Image").toString(), null));
 
-                        if(value.get("firebaseUser").toString().equals(user.getUid())){
-                            items1.add(new AuctionItem(value.get("Name").toString(), s,
-                                    value.get("startTime").toString(),
-                                    value.get("endTime").toString()
-                                    , Integer.parseInt(value.get("startPrice").toString()), Integer.parseInt(value.get("recentPrice").toString()), value.get("Describtion").toString(), value.get("Image").toString(), null));
-
+                            }
+//    public AuctionItem(String name, String auctionID, String startTime, String endTime, int startPrice, int recentPrice, String describtion, String image, FirebaseUser recentBidUser) {
+                        }catch (Exception e){
+                            continue;
                         }
+
+
                         }
 
                         adapter = new AuctionCardAdapter(items1);

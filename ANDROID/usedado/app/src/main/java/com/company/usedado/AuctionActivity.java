@@ -12,17 +12,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.company.usedado.Java.activitys.Add_offer;
 import com.company.usedado.Java.activitys.Offer_detail;
+import com.company.usedado.Java.activitys.activity_offerActivitys;
 import com.company.usedado.Java.adapter.AuctionCardAdapter;
 import com.company.usedado.Java.adapter.DashboardWideCardAdapter;
 import com.company.usedado.Java.items.AuctionItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -127,6 +131,7 @@ public class AuctionActivity extends AppCompatActivity {
 
         final  MaterialDatePicker materialDatePicker = builder.build();
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_auction);
 
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
             @Override
@@ -182,6 +187,33 @@ public class AuctionActivity extends AppCompatActivity {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 },2000);
+            }
+        });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        return true;
+                    case R.id.navigation_message:
+                        startActivity(new Intent(getApplicationContext(), activity_offerActivitys.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.navigation_add:
+                        startActivity(new Intent(getApplicationContext(), Add_offer.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.navigation_Auction:
+                        startActivity(new Intent(getApplicationContext(), AuctionActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.navigation_catagories:
+                        //startActivity(new Intent(getApplicationContext(),Messages.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
             }
         });
 
