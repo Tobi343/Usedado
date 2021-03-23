@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/LightGrey"
+    tools:context=".AuctionDetailAcitivity">
+    <ScrollView
+       android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <LinearLayout
+       android:layout_width="match_parent"
+             android:layout_height="match_parent"
+       android:orientation="vertical">
+       <ImageView
+           android:layout_margin="10dp"
+android:id="@+id/auctionDetailImage"
+           android:layout_width="match_parent"
+            android:background="@color/quantum_grey"
+           android:src="@drawable/images"
+           android:layout_height="wrap_content">
+
+       </ImageView>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="10dp"
+           android:background="@drawable/profile_overview"
+           android:backgroundTint="@color/colorWhite"
+           android:orientation="vertical">
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/auctionTitleDetail"
+               android:text="Auto zum verkauf"
+               android:textSize="28dp"
+               android:layout_margin="10dp"
+               android:textStyle="bold"
+               android:textColor="@color/black"
+               android:gravity="center"></TextView>
+
+           <com.robinhood.ticker.TickerView
+               android:id="@+id/tickerViewPrice"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/black"
+               android:textSize="60sp"
+               android:gravity="center"
+               android:layout_marginTop="15dp"
+               app:ticker_animationDuration="1500"
+               android:text="$2345.00"
+               />
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_marginVertical="10dp"
+               android:textStyle="bold"
+               android:id="@+id/auctionEndDate"
+               android:text="Ende: 23.03.2021 23:00"
+               android:gravity="center"
+               android:textSize="20dp"
+               android:textColor="@color/main_blue"
+               android:layout_height="wrap_content">
+
+           </TextView>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_marginBottom="40dp"
+               android:textStyle="bold"
+               android:text="Startprice: 2000 $"
+               android:gravity="center"
+               android:id="@+id/auctionOriginalPrice"
+               android:textSize="20dp"
+               android:textColor="@color/main_green"
+               android:layout_height="wrap_content">
+
+           </TextView>
+
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="10dp"
+           android:background="@drawable/profile_overview"
+           android:layout_gravity="center"
+           android:backgroundTint="@color/colorWhite"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:gravity="center"
+               android:layout_marginVertical="20dp">
+
+               <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/remove_counter"
+                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:tint="@color/main_red"
+                   android:src="@drawable/ic_baseline_remove_24"
+                   app:civ_border_width="2dp"
+                   app:civ_border_color="@color/main_font"/>
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="80dp"
+                  android:id="@+id/price_anzeige"
+                  android:textSize="50dp"
+                  android:gravity="center"
+                  android:text="$ 250"
+                  android:layout_marginHorizontal="30dp"
+                  android:textColor="@color/main_blue"
+                  ></TextView>
+               <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/add_counter"
+                   android:gravity="center"
+
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+
+                   android:tint="@color/main_green"
+                   android:src="@drawable/ic_add"
+                   app:civ_border_width="2dp"
+                   app:civ_border_color="#FF000000"/>
+           </LinearLayout>
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_marginHorizontal="50dp"
+               android:id="@+id/setBid"
+               android:textColor="@color/colorWhite"
+               android:backgroundTint="@color/main_blue"
+               android:text="Set Price"
+               android:textSize="20dp"
+               android:shadowRadius="1"
+               android:layout_marginBottom="20dp"
+               android:layout_height="50dp">
+
+           </Button>
+       </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="10dp"
+                 android:background="@drawable/profile_overview"
+                 android:layout_gravity="center"
+                 android:backgroundTint="@color/colorWhite"
+                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:text="Description"
+                    android:textSize="25dp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="25dp"
+                    android:textSize="18dp"
+                    android:id="@+id/auctionDescribtion"
+                    android:text="Hallo wie geht es dir und was machst du du kleiner Hurnsoshdnasdhsad asdasklfhjas fasjkfkasjhf asfjhk askfjhas flkasjf "
+                    ></TextView>
+
+
+             </LinearLayout>
+
+   </LinearLayout>
+
+</ScrollView>
+</RelativeLayout>

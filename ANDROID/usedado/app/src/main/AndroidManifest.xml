@@ -13,19 +13,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".advancedSearch"></activity>
+        <activity android:name=".auction_watch_list" />
+        <activity
+            android:name=".my_auctions"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".createAutctionActivity"
+            android:theme="@style/AppTheme2" />
+        <activity android:name=".AuctionDetailAcitivity" />
+        <activity
+            android:name=".AuctionActivity"
+            android:theme="@style/AppTheme2" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notifications_black_24dp" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-
-        <activity android:name=".Java.activitys.CategorieView"
-            android:theme="@style/AppTheme2"/>
+        <activity
+            android:name=".Java.activitys.CategorieView"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".Java.activitys.activity_offerActivitys"
             android:theme="@style/AppTheme2" />
@@ -76,14 +90,6 @@
             android:name=".Java.activitys.Login_Page"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
-
-       <!-- <service
-            android:name=".Java.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>-->
     </application>
 
 </manifest>

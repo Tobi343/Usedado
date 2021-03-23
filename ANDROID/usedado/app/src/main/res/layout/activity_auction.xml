@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AuctionActivity">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:id="@+id/auction_swiper"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="80dp"
+                    android:text="Watchlist"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/green_gradient"
+                    android:layout_marginHorizontal="5dp"
+                    ></Button>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="80dp"
+                    android:id="@+id/myAuctions"
+                    android:text="My AUctions"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/green_gradient"
+                    android:layout_marginHorizontal="5dp"
+                    ></Button>
+
+            </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+                android:id="@+id/auctionRecycler"
+            android:layout_height="match_parent"
+                ></androidx.recyclerview.widget.RecyclerView></LinearLayout>
+    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_auction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/main_blue"
+        android:outlineAmbientShadowColor="@color/main_blue"
+        app:fabSize="normal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="20dp"
+         />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:background="@color/colorWhite"
+        app:itemIconTint="@color/main_font"
+        app:itemTextColor="@color/main_font"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:menu="@menu/navigation"
+        android:layout_alignParentBottom="true"
+        app:labelVisibilityMode="labeled"
+        >
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</RelativeLayout>

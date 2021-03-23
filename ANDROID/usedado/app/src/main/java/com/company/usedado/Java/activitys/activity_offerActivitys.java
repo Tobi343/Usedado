@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.company.usedado.AuctionActivity;
 import com.company.usedado.Java.Interfaces.AdapterOfferInter;
 import com.company.usedado.Java.adapter.ViewPagerAdapter;
 import com.company.usedado.Java.dialogs.dialog_finish;
@@ -115,7 +116,7 @@ public class activity_offerActivitys extends AppCompatActivity implements dialog
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.navigation_Auction:
-                        //startActivity(new Intent(getApplicationContext(),Messages.class));
+                        startActivity(new Intent(getApplicationContext(), AuctionActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.navigation_catagories:

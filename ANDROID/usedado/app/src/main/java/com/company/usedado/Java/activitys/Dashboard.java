@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.company.usedado.AuctionActivity;
+import com.company.usedado.AuctionDetailAcitivity;
 import com.company.usedado.Java.adapter.DashboardBigCardAdapter;
 import com.company.usedado.Java.items.DashboardBigCardItem;
 import com.company.usedado.Java.adapter.DashboardWideCardAdapter;
@@ -321,7 +323,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.navigation_Auction:
-                        //startActivity(new Intent(getApplicationContext(),Messages.class));
+                        startActivity(new Intent(getApplicationContext(), AuctionActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.navigation_catagories:
@@ -343,7 +345,7 @@ public class Dashboard extends AppCompatActivity implements Serializable {
         searchAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                startActivity(new Intent(Dashboard.this, com.company.usedado.advancedSearch.class));
             }
         });
         myAdds.setOnClickListener(new View.OnClickListener() {
