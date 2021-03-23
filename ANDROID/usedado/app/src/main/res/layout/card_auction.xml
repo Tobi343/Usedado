@@ -68,6 +68,7 @@
 
         <TextView
             android:layout_marginTop="10dp"
+            android:lines="1"
             android:id="@+id/auctionDescribtion"
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
