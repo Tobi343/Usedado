@@ -276,7 +276,15 @@ public class Dashboard extends AppCompatActivity implements Serializable {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         name = findViewById(R.id.dashboard_name);
         refresh = findViewById(R.id.dashboard_refresh);
+        Button btn = findViewById(R.id.helpBtnDashboard);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),com.company.usedado.help_activity.class));
+            }
+        });
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -356,6 +364,8 @@ public class Dashboard extends AppCompatActivity implements Serializable {
 
             }
         });
+
+
 
 
 

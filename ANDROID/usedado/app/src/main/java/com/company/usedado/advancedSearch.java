@@ -21,16 +21,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
-import xyz.danoz.recyclerviewfastscroller.sectionindicator.AbsSectionIndicator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import xyz.danoz.recyclerviewfastscroller.sectionindicator.SectionIndicator;
-import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 public class advancedSearch extends AppCompatActivity {
 
@@ -45,7 +41,6 @@ public class advancedSearch extends AppCompatActivity {
 
         // Grab your RecyclerView and the RecyclerViewFastScroller from the layout
         RecyclerView recyclerView = findViewById(R.id.recyclerViewSearch);
-        VerticalRecyclerViewFastScroller fastScroller = findViewById(R.id.fast_scroller);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         CategoryAdapterCardView adapter = new CategoryAdapterCardView(items);
         recyclerView.setAdapter(adapter);
@@ -84,28 +79,6 @@ public class advancedSearch extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        // Connect the recycler to the scroller (to let the scroller scroll the list)
-        fastScroller.setRecyclerView(recyclerView);
-
-        // Connect the scroller to the recycler (to let the recycler scroll the scroller's handle)
-        recyclerView.setOnScrollListener(fastScroller.getOnScrollListener());
-        fastScroller.setSectionIndicator(new SectionIndicator() {
-            @Override
-            public void setProgress(float progress) {
-
-            }
-
-            @Override
-            public void setSection(Object section) {
-
-            }
-
-            @Override
-            public void animateAlpha(float targetAlpha) {
 
             }
         });

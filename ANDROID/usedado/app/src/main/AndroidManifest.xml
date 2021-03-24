@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".advancedSearch"
-            android:theme="@style/AppTheme2"
-            ></activity>
+        <activity android:name=".help_activity"></activity>
+        <activity
+            android:name=".advancedSearch"
+            android:theme="@style/AppTheme2" />
         <activity android:name=".auction_watch_list" />
         <activity
             android:name=".my_auctions"

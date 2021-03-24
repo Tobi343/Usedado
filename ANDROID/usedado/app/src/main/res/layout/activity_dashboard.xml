@@ -80,7 +80,7 @@
                     android:layout_weight="1"
                     android:layout_height="80dp"
                     android:text="Need Help?"
-                    android:id="@+id/CheckMessages"
+                    android:id="@+id/helpBtnDashboard"
                     android:textColor="@color/colorWhite"
                     android:background="@color/main_blue"
                     android:layout_marginHorizontal="5dp"
