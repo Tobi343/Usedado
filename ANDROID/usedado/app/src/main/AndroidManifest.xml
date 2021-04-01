@@ -23,7 +23,7 @@
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".createAutctionActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme3" />
         <activity android:name=".AuctionDetailAcitivity" />
         <activity
             android:name=".AuctionActivity"

@@ -70,7 +70,15 @@ public class advancedSearch extends AppCompatActivity {
                     Collections.sort(items, new Comparator<DashboardBigCardItem>() {
                         @Override
                         public int compare(DashboardBigCardItem o1, DashboardBigCardItem o2) {
-                            return o1.getPrice().replace("€","").compareTo(o2.getPrice().replace("€",""));
+                            Integer price1 = Integer.parseInt(o1.getPrice().replace("€",""));
+                            Integer price2 = Integer.parseInt(o2.getPrice().replace("€",""));
+                            if(price1 > price2){
+                                return 1;
+                            }
+                            else if(price1 < price2){
+                                return -1;
+                            }
+                            return 0;
                         }
                     });
                 }

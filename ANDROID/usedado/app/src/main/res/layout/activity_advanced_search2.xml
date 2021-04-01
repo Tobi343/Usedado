@@ -48,7 +48,7 @@ android:layout_marginLeft="80dp"
            android:orientation="horizontal">
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/recyclerViewSearch"
-               android:layout_width="wrap_content"
+               android:layout_width="match_parent"
                android:layout_weight="1"
 
                android:layout_height="match_parent"
